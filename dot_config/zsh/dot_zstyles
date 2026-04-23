@@ -1,0 +1,138 @@
+# .zstyles
+# a lot comes from https://thevaluable.dev/zsh-completion-guide-examples/
+ 
+# ## docker
+# # Short-option stacking can be enabled with:
+# zstyle ':completion:*:*:docker:*' option-stacking yes
+# zstyle ':completion:*:*:docker-*:*' option-stacking yes
+# 
+
+start_measure "zstyles total"
+
+# Should be called before compinit
+zmodload zsh/complist
+
+# Use hjlk in menu selection (during completion)
+# Doesn't work well with interactive mode
+bindkey -M menuselect 'h' vi-backward-char
+bindkey -M menuselect 'k' vi-up-line-or-history
+bindkey -M menuselect 'j' vi-down-line-or-history
+bindkey -M menuselect 'l' vi-forward-char
+
+bindkey -M menuselect '^xg' clear-screen
+bindkey -M menuselect '^xi' vi-insert                      # Insert
+bindkey -M menuselect '^xh' accept-and-hold                # Hold
+bindkey -M menuselect '^xn' accept-and-infer-next-history  # Next
+bindkey -M menuselect '^xu' undo                           # Undo
+
+#for docker completions
+fpath=(/Users/daniel.blum/.docker/completions $fpath)
+
+autoload -U compinit;
+# reload once a day - https://gist.github.com/ctechols/ca1035271ad134841284#gistcomment-2308206
+if [[ -n ${ZDOTDIR}/.zcompdump(#qN.mh+24) ]]; then
+	compinit;
+else
+	compinit -C;
+fi;
+_comp_options+=(globdots) # With hidden files
+
+# Only work with the Zsh function vman
+# See $DOTFILES/zsh/scripts.zsh
+#compdef vman="man"
+
+# +---------+
+# | Options |
+# +---------+
+
+setopt GLOB_COMPLETE      # Show autocompletion menu with globs
+setopt MENU_COMPLETE        # Automatically highlight first element of completion menu
+setopt AUTO_LIST            # Automatically list choices on ambiguous completion.
+setopt COMPLETE_IN_WORD     # Complete from both ends of a word.
+
+# +---------+
+# | zstyles |
+# +---------+
+
+# Ztyle pattern
+# :completion:<function>:<completer>:<command>:<argument>:<tag>
+
+# Define completers
+zstyle ':completion:*' completer _extensions _complete _approximate
+
+# Use cache for commands using cache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+# Complete the alias when _expand_alias is used as a function
+zstyle ':completion:*' complete true
+zstyle ':completion:*' verbose yes
+
+zle -C alias-expension complete-word _generic
+bindkey '^Xa' alias-expension
+zstyle ':completion:alias-expension:*' completer _expand_alias
+
+# Allow you to select in a menu
+zstyle ':completion:*' menu select
+
+
+
+# Autocomplete options for cd instead of directory stack
+zstyle ':completion:*' complete-options true
+
+zstyle ':completion:*' file-sort modification
+
+zstyle ':completion:*:*:*:*:corrections' format '%F{yellow}!- %d (errors: %e) -!%f'
+zstyle ':completion:*:*:*:*:descriptions' format '%F{blue}-- %D %d --%f'
+zstyle ':completion:*:*:*:*:messages' format ' %F{purple} -- %d --%f'
+zstyle ':completion:*:*:*:*:warnings' format ' %F{red}-- no matches found --%f'
+ zstyle ':completion:*:default' list-prompt '%S%M matches%s'
+# Colors for files and directory
+zstyle ':completion:*:*:*:*:default' list-colors ${(s.:.)LS_COLORS}
+
+# Only display some tags for the command cd
+zstyle ':completion:*:*:cd:*' tag-order local-directories directory-stack path-directories
+zstyle ':completion:*:complete:git:argument-1:' tag-order !aliases
+
+# Required for completion to be in good groups (named after the tags)
+zstyle ':completion:*' group-name ''
+
+zstyle ':completion:*:*:-command-:*:*' group-order aliases builtins functions commands
+
+# See ZSHCOMPWID "completion matching control"
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+zstyle ':completion:*' keep-prefix true
+
+# ssh stuff
+zstyle ':completion:*:(ssh|scp|sftp|rsh|rsync):argument-1:*' tag-order hosts # set up tag order
+zstyle ':completion:*:(ssh|scp|sftp|rsh|rsync):users' hidden true # hide users
+h=()
+[[ -r ~/.ssh/config ]] && h+=($(awk '/^Host /{print $2}' ~/.ssh/config)) # get hosts by host name
+[[ -r ~/.ssh/known_hosts ]] && h+=($(awk '{print $1}' ~/.ssh/known_hosts{,2} 2>/dev/null | cut -d, -f1 | sed 's/^\[\(.*\)\]:.*/\1/')) # get known hosts but remove brackets
+(( ${#h[@]} )) && {
+  zstyle ':completion:*:(ssh|scp|sftp|rsh|rsync):*' hosts $h
+}
+
+
+## load bash stuff for certain applications
+autoload bashcompinit && bashcompinit -C # the following require bash completions
+
+# aws completion installed for aws cli (don't think this is installed with brew)
+complete -C '/usr/local/bin/aws_completer' '/usr/local/bin/aws' 
+
+# terraform completion NOT using -install-autocomplete
+# https://github.com/hashicorp/terraform/issues/25421
+# make sure install location is correct
+complete -o nospace -C '/opt/homebrew/bin/terraform terraform'
+
+
+# tofu autocompletion
+complete -o nospace -C /opt/homebrew/bin/tofu tofu
+
+# brew autocompletion https://docs.brew.sh/Shell-Completion
+if type brew &>/dev/null
+then
+  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+fi
+
+end_measure "zstyles total"

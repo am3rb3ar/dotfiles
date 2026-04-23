@@ -1,0 +1,10 @@
+# .zlogout
+#
+# Remember Order of Operations
+# 1. .zshenv
+# 2. .zpofile for login shell
+# 3. .zshrc for interactive shell
+# 4. .zlogin for login POST interactive
+# 5. .zlogout for login out
+#
+

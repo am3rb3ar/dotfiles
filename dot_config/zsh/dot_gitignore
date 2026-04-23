@@ -1,0 +1,8 @@
+.git/
+.env
+.zsh_history
+.zsh_sessions
+.zcompcache
+.zcompdump*
+.zhistory
+plugins/*

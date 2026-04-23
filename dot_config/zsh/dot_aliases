@@ -1,0 +1,134 @@
+#!/usr/bin/env bash
+
+start_measure "aliases"
+set +e
+
+# pretty colors
+# comes from https://github.com/Gogh-Co/Gogh
+# written as a function in zsh/function/gogh
+alias term-color='gogh'
+
+alias show-aliases='bat ~/.config/zsh/.aliases'
+
+# editing
+edit_choice="${EDITOR:-vim}"
+alias zshenv='${edit_choice} ${ZDOTDIR}/.zshenv'
+alias zprofile='${edit_choice} ${ZDOTDIR}/.zprofile'
+alias zshrc='${edit_choice} ${ZDOTDIR}/.zshrc'
+alias zlogin='${edit_choice} ${ZDOTDIR}/.zlogin'
+alias zstyles='${edit_choice} ${ZDOTDIR}/.zstyles'
+alias tmux.conf='${edit_choice} ~/.config/tmux/tmux.conf'
+alias aliases='${edit_choice} ${ZDOTDIR}/.aliases'
+alias .env='${edit_choice} ${ZDOTDIR}/.env'
+alias zshconfig='${edit_choice} -p ${ZDOTDIR}/.zshrc ${ZDOTDIR}/.zshenv ${ZDOTDIR}/.aliases'
+
+# allows indexing of the history of directories
+# from https://thevaluable.dev/zsh-install-configure-mouseless/
+alias d='dirs -v'
+#for index ({1..9}) alias "$index"="cd +${index}"; unset index
+
+# standard aliases
+alias rm='rm -iv'
+alias cp='cp -iv'
+alias mv='mv -iv'
+
+alias ezax='eza --icons --color=auto'
+alias l='ezax --long'
+alias ll='ezax --long --header --group'
+alias la='ezax --long --header --group --all'
+alias tree='ezax --tree'
+alias et='ezax --tree'
+alias eta='ezax --tree --all'
+
+# alias grep='grep --color=auto'
+alias grep='rg'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias history='history 0'
+alias h='history'
+alias hf='h | fzf'
+alias hg='h | grep'
+
+alias find='fd'
+
+alias listPath='echo $PATH | sed "s/:/\n/g"'
+
+# bat
+alias cat='bat -pp'
+alias less='bat --paging=always'
+
+# zoxide
+alias cd='z'
+
+# zellij
+alias zj='zellij'
+
+# nvim
+alias nv='nvim'
+alias lv='NVIM_APPNAME=lazyvim nvim'
+# alias bv='NVIM_APPNAME=BlumVim nvim'
+alias nf='nvimfzf'
+
+# pnpm
+alias pn='pnpm'
+alias px='pnpm dlx'
+
+# https://michaeluloth.com/neovim-switch-configs/
+# alias nv-default='NVIM_APPNAME=nvim'
+# alias nvim-lazy='NVIM_APPNAME=LazyVim nvim'
+
+# zed
+alias zed='/Applications/Zed.app/Contents/MacOS/cli'
+
+# kubectl
+alias kct='kubectl'
+alias kct-context='kct config use-context'
+alias kct-all-pods='kct get pods -A'
+alias kct-all-services='kct get services -A'
+# aliases/functions to add
+# kubectl port-forward <name of pod> <port:port>
+
+# terraform
+alias terra='terraform'
+alias terrascan='docker run --rm -it -v "$(pwd):/iac" -w /iac tenable/terrascan'
+
+# docker
+alias dockerC='docker compose'
+alias dockerRegistryStart='docker run -d -p 5000:5000 --restart=always --name registry registry:2'
+alias dockerRegistryStop='docker stop registry && docker rm -v registry'
+
+# AGSW
+alias points='POINTS_ACCESS_TOKEN="$(tokens points)" points'
+alias tom-keygen='ssh-keygen -t ed25519 -b 4096 -o -a 100'
+
+# markdownlint-cli - installed through npm via fast node manager
+alias mdlint='markdownlint --config $XDG_CONFIG_HOME/markdownlint-cli/config.toml'
+
+# easy nav
+alias obsidian-vault="cd 'Users/daniel.blum/OneDrive - Analog Devices, Inc/ObsidianVaults/adi-vault'"
+
+##################################### AWS ######################################
+
+# AWS Profiles
+alias aws-clear='unset AWS_PROFILE'
+alias aws-lyric-admin='aws-login lyric-admin && export AWS_PROFILE=lyric-admin'
+alias aws-agswmd-admin='aws-login agswmd-admin && export AWS_PROFILE=agswmd-admin'
+alias aws-agswmd-cluster-admin='aws-login agswmd-cluster-admin && export AWS_PROFILE=agswmd-cluster-admin'
+alias aws-agswmd-read-only='aws-login agswmd-cluster-read-only && export AWS_PROFILE=agswmd-cluster-read-only'
+alias aws-developer-admin='aws-login garage-developer-sadbox-admin && export AWS_PROFILE=garage-developer-sadbox-admin'
+alias aws-gitops-terraform='export AWS_PROFILE=gitops-terraform'
+
+# SOPS keys
+alias sops-kms-gitlab='export SOPS_KMS_ARN='\''arn:aws:kms:us-east-1:687013406796:key/9501e52f-276e-46b7-b965-91583ccaadc7'\'''
+alias sops-kms-admin-state='export SOPS_KMS_ARN='\''arn:aws:kms:us-east-1:687013406796:key/2914f07c-3c51-4d09-a2d2-686523748986'\'''
+alias sops-kms-cicd-admin='export SOPS_KMS_ARN='\''arn:aws:kms:us-east-1:687013406796:key/30c007b4-1a0a-49fa-85ff-cea6b3da9824'\'''
+alias sops-kms-gitops-terraform='export SOPS_KMS_ARN='\''arn:aws:kms:us-east-1:687013406796:key/b0e38b29-cbfa-48bd-8085-55303ee2784d'\'''
+alias sops-kms-agsw-md='export SOPS_KMS_ARN='\''arn:aws:kms:us-east-1:687013406796:key/6ec29913-6ea8-4ab5-b405-b6be372bf2bc'\'''
+alias sops-kms-terraform-iam-control='export SOPS_KMS_ARN='\''arn:aws:kms:us-east-1:687013406796:key/e64a5425-2dd8-466d-9712-a64ab6bd2147'\'''
+alias sops-kms-acdc-dev='export SOPS_KMS_ARN='\''arn:aws:kms:us-east-1:687013406796:key/7038b381-39c7-4597-bc85-c31c4fe24565'\'''
+
+
+# ec2
+# alias ec2-connect='aws ec2-instance-connect ssh --os-user ubuntu --connection-type direct --instance-id'
+
+end_measure "aliases"

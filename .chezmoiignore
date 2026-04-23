@@ -1,0 +1,6 @@
+{{ if not (default false .work) -}}
+dot_config/fish/conf.d/private_netskope.fish
+{{- end }}
+{{ if not (default false .configure_zsh) -}}
+dot_config/zsh/**
+{{- end }}
