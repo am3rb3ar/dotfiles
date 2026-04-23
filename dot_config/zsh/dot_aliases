@@ -1,6 +1,5 @@
 #!/usr/bin/env bash
 
-start_measure "aliases"
 set +e
 
 # pretty colors
@@ -131,4 +130,3 @@ alias sops-kms-acdc-dev='export SOPS_KMS_ARN='\''arn:aws:kms:us-east-1:687013406
 # ec2
 # alias ec2-connect='aws ec2-instance-connect ssh --os-user ubuntu --connection-type direct --instance-id'
 
-end_measure "aliases"

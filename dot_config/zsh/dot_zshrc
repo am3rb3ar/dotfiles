@@ -8,14 +8,8 @@
 # 4. .zlogin for login POST interactive
 # 5. .zlogout for login out
 
+fastfetch
 
-start_measure "zshrc total"
-
-if (( ! ${+ZPROF_ON} )); then
-  fastfetch
-fi
-
-start_measure "setopt"
 ## Navigation options
 setopt AUTO_CD              # Go to folder path without using cd.
 
@@ -38,25 +32,19 @@ setopt HIST_IGNORE_SPACE         # Do not record an event starting with a space.
 setopt HIST_SAVE_NO_DUPS         # Do not write a duplicate event to the history file.
 setopt HIST_VERIFY               # Do not execute immediately upon history expansion.
 
-end_measure "setopt"
 
 
 ## Since OSX is using an old bash, we're going to update it
 alias bash='/opt/homebrew/bin/bash'
 
-start_measure "starship"
 # starship prompt
 eval "$(starship init zsh)"
-end_measure "starship"
-
-
 
 # ----------------------------------------------------------------------------
 ## fpath and function loading ------------------------------------------------
 # https://unix.stackexchange.com/questions/33255/how-to-define-and-load-your-own-shell-function-in-zsh
 # ----------------------------------------------------------------------------
 
-start_measure "fpath"
 fpath=(
   #$ZDOTDIR/plugins  # plugins are loaded at the end now
   "$ZDOTDIR/functions"
@@ -65,7 +53,6 @@ fpath=(
   "${fpath[@]}"
 )
  
-end_measure "fpath"
 
 # ----------------------------------------------------------------------------
 ## ZSH stuff -----------------------------------------------------------------
@@ -97,32 +84,29 @@ end_measure "fpath"
 
 
 
-start_measure "functions"
 # load functions in zsh/function folder
 # (NOTE: still need to understand this loading better. . .)
-autoload -Uz \
-  aws-assume-role \
-  aws-stop-role \
-  aws-login \
-  docker_logins \
-  fzo \
-  fzp \
-  frg \
-  git-origin \
-  gogh \
-  hello \
-  listpath \
-  mdcd \
-  nvimfzf  \
-  nvims \
-  tmux-local \
-  toggle-darkmode
-end_measure "functions"
+# autoload -Uz \
+#   aws-assume-role \
+#   aws-stop-role \
+#   aws-login \
+#   docker_logins \
+#   fzo \
+#   fzp \
+#   frg \
+#   git-origin \
+#   gogh \
+#   hello \
+#   listpath \
+#   mdcd \
+#   nvimfzf  \
+#   nvims \
+#   tmux-local \
+#   toggle-darkmode
 
 # ----------------------------------------------------------------------------
 # VI mode --------------------------------------------------------------------
 # ----------------------------------------------------------------------------
-start_measure "vi mode"
 bindkey -v
 bindkey "^H" backward-delete-char
 bindkey "^?" backward-delete-char
@@ -160,66 +144,48 @@ edit-command-line-custom() {
 zle -N edit-command-line-custom
 bindkey -M vicmd v edit-command-line-custom
 
-end_measure "vi mode"
 
 # ----------------------------------------------------------------------------
 # Programs -------------------------------------------------------------------
 # ----------------------------------------------------------------------------
 
-start_measure "pyenv"
 eval "$(pyenv init --path)"
-end_measure "pyenv"
 
-# start_measure "1password"
 # # 1password
 # eval "$(op completion zsh)"
 # compdef _op op
-# end_measure "1password"
 
-start_measure "fzf"
 # fzf
 source <(fzf --zsh)
-end_measure "fzf"
 
-start_measure "zoxide"
 ## zoxide
 eval "$(zoxide init zsh)"
-end_measure "zoxide"
 
 
-start_measure "kubectl"
 # kubectl
 source <(kubectl completion zsh)
-end_measure "kubectl"
 
-start_measure "rbenv"
 eval "$(rbenv init - zsh)"
-end_measure "rbenv"
 
 ## Personal Scripts
-export PATH="/Users/daniel.blum/code/bin:$PATH"
+# export PATH="/Users/daniel.blum/code/bin:$PATH"
 
 
 # ----------------------------------------------------------------------------
 # Plugins --------------------------------------------------------------------
 # ----------------------------------------------------------------------------
-start_measure "plugins"
-PLUGINS="$ZDOTDIR/plugins"
-source "$PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
-source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
-source "$PLUGINS/colored-man-pages/colored-man-pages_mod.plugin.zsh"
-source "$PLUGINS/zsh-completions/zsh-completions.plugin.zsh"
-source "$PLUGINS/omz-git/git.plugin.zsh" # git plugin from OH MY ZSH
-source "$PLUGINS/zsh-hist/zsh-hist.plugin.zsh"
+# PLUGINS="$ZDOTDIR/plugins"
+# source "$PLUGINS/zsh-autosuggestions/zsh-autosuggestions.zsh"
+# source "$PLUGINS/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+# source "$PLUGINS/colored-man-pages/colored-man-pages_mod.plugin.zsh"
+# source "$PLUGINS/zsh-completions/zsh-completions.plugin.zsh"
+# source "$PLUGINS/omz-git/git.plugin.zsh" # git plugin from OH MY ZSH
+# source "$PLUGINS/zsh-hist/zsh-hist.plugin.zsh"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh # installed through brew
 
-end_measure "plugins"
-
-start_measure "zsh autosuggest"
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#4e6e5d,bg=#adbabd,bold,underline"
 ZSH_AUTOSUGGEST_STRATEGY=(history completion)
-end_measure "zsh autosuggest"
 
 # ----------------------------------------------------------------------------
 # Random ---------------------------------------------------------------------
@@ -232,8 +198,8 @@ export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
 
 # for libpq - not installing postgresql
-export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
+# export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+# export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
 
 # bat theme
 # view themes `bat --list-themes` or
@@ -241,7 +207,7 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/libpq/lib/pkgconfig"
 export BAT_THEME="Dracula"
 
 # jujutsu completions (these aren't loaded like normal completions)
-source <(COMPLETE=bash jj)
+# source <(COMPLETE=bash jj)
 
 
 ## Aliases
@@ -250,28 +216,7 @@ source <(COMPLETE=bash jj)
 ## GPG
 export GPG_TTY=$(tty)
 
-
-
-if (( ${+ZPROF_ON} )); then
-  fastfetch
-fi
-
-end_measure "zshrc total"
-
-# profiling cleanup
-# ----------------------------------------------------------------------------
-cleanup_logs
-
-
-# Node -----------------------------------------------------------------------
-# ----------------------------------------------------------------------------
-# Volta (for managing tools) https://docs.volta.sh/guide/getting-started
-export VOLTA_HOME="$XDG_DATA_HOME/volta"
-export PATH="$VOLTA_HOME/bin:$PATH"
-
-# start_measure "sdkman"
 # ----------------------------------------------------------------------------
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/Users/daniel.blum/Library/Application Support/sdkman"
 [[ -s "/Users/daniel.blum/Library/Application Support/sdkman/bin/sdkman-init.sh" ]] && source "/Users/daniel.blum/Library/Application Support/sdkman/bin/sdkman-init.sh"
-# end_measure "sdkman"

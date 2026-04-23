@@ -1,34 +1,3 @@
-: 1775221338:0;./setup-netskope.sh
-: 1775221517:0;nv .bashrc
-: 1775221534:0;echo
-: 1775221543:0;bash
-: 1775221926:0;grep -r "SSL_CERT_FILE" ~/.z* ~/.config/zsh/ 2> /dev/null
-: 1775221967:0;cd /etc/
-: 1775222026:0;cat environment
-: 1775222028:0;rm environment
-: 1775222034:0;sudo rm environment
-: 1775222049:0;cd
-: 1775222068:0;grep -r "SSL_CERT_FILE" /etc/zsh* /etc/profile* 2> /dev/null
-: 1775222087:0;sudo rm /etc/zshrc.backup-before-nix
-: 1775222093:0;cat /etc/zshrc
-: 1775222120:0;grep -r "SSL_CERT_FILE" /etc/zsh* /etc/profile* /etc/bash* 2> /dev/null
-: 1775222145:0;grep -i "SSL_CERT_FILE" ~/.config/tmux 2> /dev/null
-: 1775222158:0;export | grep SSL_CERT_FILE
-: 1775222207:0;launchctl getenv SSL_CERT_FILE
-: 1775222272:0;curl https://ifconfig.me
-: 1775222407:0;openssl s_client -connect example.com:443 -servername example.com < /dev/null 2> /dev/null | openssl x509 -noout -text | grep DNS
-: 1775222452:0;cd Code/devops/workflows/terra-release
-: 1775222463:0;wt switch feat/add-error-logs-to-summary
-: 1775222520:0;echo $REQUESTS_CA_BUNDLE
-: 1775222534:0;echo $AWS_CA_BUNDLE
-: 1775222557:0;ps -p $PPID -E | grep SSL_CERT_FILE
-: 1775222563:0;curl https://api.github.com
-: 1775222572:0;curl -v https://api.github.com
-: 1775222592:0;curl -v https://www.google.com
-: 1775222671:0;curl -v https://httpbin.org/get 2>&1 | grep -E "SSL|TLS|cert"
-: 1775222680:0;grep --version
-: 1775223451:0;docker run --rm --tty -it --entrypoint '/bin/bash' debian:trixie
-: 1775224380:0;cd test-error
 : 1775224382:0;terra init
 : 1775224387:0;terra fmt
 : 1775224395:0;git restore main.tf
@@ -266,7 +235,6 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1775497328:0;aerospace list-apps
 : 1775497582:0;ll
 : 1775497586:0;eza
-: 1775497591:0;tree
 : 1775504177:0;which kitty
 : 1775504225:0;which nv
 : 1775504228:0;which nvim
@@ -355,7 +323,6 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1775742443:0;kitty themes
 : 1775742675:0;kitten themes
 : 1775742700:0;nv __main__.py
-: 1775743121:0;cd zellij
 : 1775826395:0;wt switch --create main.devops-process
 : 1775826408:0;wt
 : 1775826420:0;wt remove main.devops-process
@@ -382,7 +349,6 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1776169167:0;git commit -m"getting capabilities in"
 : 1776175911:0;brew install vale
 : 1776176293:0;cd ~/.local
-: 1776176300:0;et
 : 1776176307:0;l mason
 : 1776177053:0;l mason/bin
 : 1776177069:0;l mason/packages
@@ -794,7 +760,6 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1776688216:0;zellij ls
 : 1776688220:0;which z
 : 1776688241:0;cd ../zsh
-: 1776688291:0;exec zsh
 : 1776688318:0;zj a learning
 : 1776688987:0;cd ../.claude
 : 1776690411:0;claude --resume a6787a5c-9157-422c-adb9-5eb9e6eda821
@@ -937,14 +902,12 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1776945850:0;git commit -m"initial commit"
 : 1776945861:0;git push -u origin main
 : 1776945901:0;pwd
-: 1776946150:0;chezmoi cd
 : 1776946313:0;chezmoi add ~/.config/nvim
 : 1776946329:0;l dot_config
 : 1776947172:0;nvim
 : 1776947361:0;nvim --headless "+Lazy! sync" + qa
 : 1776947437:0;nvim --headless "+Lazy! install blink.lib" +qa
 : 1776948435:0;rm -fr ~/.local/share/nvim
-: 1776948799:0;chezmoi edit ~/.config/nvim
 : 1776949097:0;cd ../.config/nvim
 : 1776949100:0;touch .chezmoiignore
 : 1776949146:0;cd dot_config/nvim/
@@ -954,20 +917,15 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1776949189:0;git add dot_confi
 : 1776949191:0;git add dot_config
 : 1776949198:0;git commit -m"adding nvim"
-: 1776949208:0;cd ../nvim-min
 : 1776949219:0;cp ../nvim/.chezmoiignore ./
-: 1776949230:0;chezmoi --help
 : 1776949244:0;chezmoi add ~/.config/nvim-min
-: 1776949249:0;chezmoi apply
 : 1776953347:0;chezmoi add ~/.config/git
-: 1776953356:0;nv
 : 1776953616:0;git commit -m"adding 1password"
 : 1776953778:0;l ~/.config
 : 1776953887:0;git dif
 : 1776953892:0;git diff
 : 1776953896:0;git add roles
 : 1776953902:0;git commit -m"adding k9s"
-: 1776953904:0;git push
 : 1776953966:0;chezmoi add ~/.config/{aerospace,cargo,fish,gh,ghostty,k9s,kitty,zellij}
 : 1776954732:0;chezmoi add ~/.config/{aerospace,fish,gh,ghostty,k9s,kitty,zellij}
 : 1776960435:0;obsidian
@@ -978,7 +936,6 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1776963780:0;git add *
 : 1776964584:0;cd ~/Code/claude-chat
 : 1776964587:0;claude
-: 1776965548:0;gst
 : 1776965563:0;git rm -r dot_config/cargo
 : 1776965569:0;cd dot_config
 : 1776965573:0;rm -fr cargo
@@ -987,66 +944,39 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1776965603:0;rm -fr dot_git
 : 1776965615:0;cd ../aerospace/
 : 1776965621:0;cat README.md
-: 1776965643:0;cd ../
 : 1776965650:0;cd ../fish
 : 1776965656:0;cd ../gh
-: 1776965657:0;l
 : 1776965661:0;cd ../ghostty
 : 1776965666:0;cd ../git
 : 1776965671:0;cd ../kitty
 : 1776965680:0;cd ../nvim
-: 1776965682:0;ls -la
-: 1776965686:0;nv .chezmoiignore
 : 1776965702:0;cd nvim
 : 1776965704:0;rm -fr .git
-: 1776965706:0;la
 : 1776965712:0;cd ../nvim-min
-: 1776965713:0;ls -la
-: 1776965725:0;cd ../
-: 1776965725:0;l
-: 1776965736:0;cd ../
 : 1776965739:0;nv k9s
-: 1776965746:0;l
 : 1776965749:0;cd k9s
-: 1776965749:0;l
-: 1776965750:0;la
 : 1776965756:0;tree
 : 1776965769:0;chezmoi --help
 : 1776965797:0;chezmoi forget ~/.config/k9s
-: 1776965802:0;l
 : 1776965810:0;chezmoi add ~/.config/k9s
-: 1776965813:0;l
-: 1776965821:0;cd ../
 : 1776965832:0;l zellij
 : 1776965837:0;cd zellij
-: 1776965837:0;l
 : 1776965850:0;rm config.kdl.*
 : 1776965857:0;ls -la
 : 1776965861:0;tree plugins
 : 1776965865:0;ls -la layouts
-: 1776965870:0;gst
 : 1776965882:0;git rm cargo
 : 1776965886:0;git rm -r cargo
-: 1776965887:0;gst
 : 1776965898:0;git rm -r aerospace/dot_git
-: 1776965899:0;gst
 : 1776965910:0;git commit -m"adding some more configs"
-: 1776965918:0;git push
-: 1776966372:0;l
 : 1776966373:0;cd ../
-: 1776966374:0;l
-: 1776966538:0;nv
 : 1776966896:0;cd ../chezmoi
-: 1776966897:0;l
 : 1776966915:0;nv chezmoi.toml
-: 1776966942:0;l
 : 1776966948:0;cat chezmoi.toml
 : 1776968250:0;cd ~
-: 1776968250:0;la
 : 1776968266:0;cat .bashrc
 : 1776968273:0;cat .zshenv
 : 1776968590:0;defaults --currentHost read -g com.apple.keyboard.modifiermapping.-1.-1
-: 1776968609:0;defaults -currentHost read -g com.apple.keyboard.modifiermapping.-1.-1
 : 1776968772:0;! defaults -currentHost read -g com.apple.keyboard.modifiermapping.-1.-1
 : 1776968776:0;defaults -currentHost read -g com.apple.keyboard.modifiermapping.-1.-1
 : 1776968817:0;cd .config/karabiner
@@ -1054,22 +984,22 @@ docker run --tty --rm -it -v "/Users/Shared/Netskope/nscacert_combined.pem:${CER
 : 1776968822:0;et
 : 1776968828:0;nv karabiner.json
 : 1776968862:0;chezmoi add ~/.config/karabiner/
-: 1776968924:0;gst
 : 1776968942:0;git add dot_config/private_karabiner/
 : 1776968943:0;gst
 : 1776968950:0;git commit -m"adding karabiner"
 : 1776968953:0;git push
-: 1776969208:0;l
-: 1776969638:0;chezmoi add ~/.config/zsh
 : 1776969650:0;cat .chezmoiignore
-: 1776969787:0;chezmoi add ~/.config/zsh
 : 1776969793:0;nv .chezmoiignore
-: 1776969907:0;chezmoi edit ~/.config/nvim
 : 1776969922:0;nv ../
 : 1776969945:0;chezmoi edit ~/.config/nvim
 : 1776969970:0;chezmoi apply
-: 1776969988:0;nv
 : 1776970100:0;l
 : 1776970109:0;chezmoi cd
 : 1776970112:0;nv
 : 1776970525:0;chezmoi add ~/.config/zsh
+: 1776979223:0;nvim ../zsh/.zstyles
+: 1776979252:0;nvim ../zsh/.aliases
+: 1776979265:0;exec zsh
+: 1776979266:0;l
+: 1776979271:0;cd 
+: 1776979288:0;chezmoi add ~/.config/zsh

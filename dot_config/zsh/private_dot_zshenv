@@ -9,75 +9,8 @@
 #
 #
 
-################################################################################
-# setup functions for manual profiling
-################################################################################
-# profiling
-# REMEMBER THAT `exec zsh` INHERITS ENV VARIABLES!!!!!!!!
-# export ZPROF_ON=true
 
-start_measure() {
-  if (( ! ${+ZPROF_ON} )); then
-    return
-  fi
-  key=$1
-  timing_dict[$key]=$(gdate +%s%N)
-}
-
-end_measure() {
-  if (( ! ${+ZPROF_ON} )); then
-    return
-  fi
-
-  local end_time=$(gdate +%s%N)
-  key=$1
-  if [[ ! -v timing_dict[$key] ]]; then
-    echo "Error: $1 key not found"
-    return
-  fi
-  local start_time=timing_dict[$key]
-  local elapsed=$((end_time - start_time))
-  local elapsed_time=$(( elapsed / 1000000 ))
-  local remainder=$(( elapsed % 10000000 ))
-  if [ $remainder -gt 0 ]; then
-    elapsed_time=$((elapsed_time + 1))
-  fi
-
-  # printf "%-60s %4d ms\n" "loaded $1:" elapsed_time
-  local text="loaded $key "
-  local width=40
-  local dots=$(printf "%*s" $((width - ${#text})) "" | tr ' ' '.')
-  printf "%s%s%6d ms\n" "$text" "$dots" "$elapsed_time" | tee -a "$PROFILE_LOG_FILE"
-}
-
-cleanup_logs() {
-  if (( ! ${+ZPROF_ON} )); then
-    return
-  fi
-  (
-    cd "$PROFILE_LOG_DIR" && ls | \
-      tail -n +11 | \
-      while read -r file; do rm -f "$file"; done
-  )
-  echo "\n\n" >> "$PROFILE_LOG_FILE"
-  zprof >> "$PROFILE_LOG_FILE"
-  unset timing_dict
-}
-
-export PROFILE_LOG_DIR="$HOME/Library/Logs/zprof"
-export PROFILE_LOG_FILE="$PROFILE_LOG_DIR/zprof_output_$(date +"%Y-%m-%d_%H-%M-%S").log"
-if (( ${+ZPROF_ON} )); then
-  typeset -A timing_dict
-  zmodload zsh/zprof
-fi
-
-################################################################################
-################################################################################
-################################################################################
-
-start_measure "zshenv total"
-
-# Getting .config file going on :)
+# Getting .config file going on
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$HOME/.local/share"
@@ -88,8 +21,6 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
 export EDITOR="$HOME/.local/bin/nvim-wrapper"
 export VISUAL="$HOME/.local/bin/nvim-wrapper"
-# export PAGER="less -R" # less -R allows for color codes to be passed through
-# export PAGER="bat --pager=always"
 
 export HISTFILE="$XDG_CACHE_HOME/zhistory"
 export HISTSIZE=10000
@@ -107,13 +38,8 @@ export GIT_SSL_CAINFO="/Users/Shared/Netskope/nscacert_combined.pem"
 # END NETSKOPE CERTIFICATE CONFIGURATION
 ################################################################################
 
-
-# Cloudsmith Stuff
-export CLOUDSMITH_USERNAME="daniel-blum"
-
 # Ensure brew is in the patch when setting up envvariables
 # This also adds some homebrew specific env variables
-start_measure "brew setup"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
@@ -131,41 +57,15 @@ export CPPFLAGS="$openssl_cpp_flag $libpq_cpp_flag $zlib_cpp_flag"
 
 export CONFIGURE_OPTS="--with-opensll=$(brew --prefix openssl)"
 
-end_measure "brew setup"
-
-
-# Docker stuff
-# though this is supposed to be used for any `docker <command> --platform=${DOCKER_DEFAULT_PLATFORM}` command, this thing makes a lot of things break.
-# Specifically, kind has a problem with this: https://github.com/kubernetes-sigs/kind/issues/2718
-#export DOCKER_DEFAULT_PLATFORM="linux/amd64" # if things in docker aren't happy, remember to turn this off. . .
-
-
 # general location fo app support on OSX
 app_support="/Users/daniel.blum/Library/Application Support"
-
-# AGSW -----------------------------------------------------------------------
-# ----------------------------------------------------------------------------
-
-# Points Proejcts
-# ----------------------------------------------------------------------------
-# start_measure "config points"
-
-#POINTS_ACCESS_TOKEN=<yeah right you don't pwn me!>
-# POINTS_PROJECT_PATH='boston-garage/pst/project-management'
-# POINTS_SCRUM='A&I'
-#POINTS_TEAM='PST'
-
-# end_measure "config points"
-
-start_measure "language configs"
-
 
 # Rust Config ----------------------------------------------------------------
 # ----------------------------------------------------------------------------
 export RUSTUP_HOME="${XDG_CONFIG_HOME}/rustup"
 export CARGO_HOME="${XDG_CONFIG_HOME}/cargo"
 export PATH="${CARGO_HOME}/bin:$PATH"
-. "${CARGO_HOME}/env"
+source "${CARGO_HOME}/env"
 
 
 # Java Config ----------------------------------------------------------------
@@ -179,38 +79,25 @@ export PATH="$GOPATH/bin:$PATH"
 # currently has global install at /usr/local/go/bin
 
 
-# Python ---------------------------------------------------------------------
+
+# Pyenv ----------------------------------------------------------------------
 # ----------------------------------------------------------------------------
-
-## Poetry
-export PATH="$PATH:/Users/daniel.blum/.local/bin"
-
-## Pyenv
 # this isn't a configuration folder so DON'T put it in XDG_CONFIG_HOME
 export PYENV_ROOT="$HOME/.pyenv"
 
-## uv
+# uv -------------------------------------------------------------------------
+# ----------------------------------------------------------------------------
 export UV_PYTHON_PREFERENCE="system"
-
-# setup credential store: https://docs.astral.sh/uv/concepts/authentication/http/#the-uv-credentials-store
-# NEITER OF THESE ARE WORKING ON OSX THIS IS NOT WORKING
-#
-# https://github.com/astral-sh/uv/issues/8810
-# export UV_PREVIEW_FEATURES=native-auth
-#
-# https://github.com/astral-sh/uv/issues/12591 - deals with a keyring issue
-# UV_KEYRING_PROVIDER=subprocess
 
 # Ruby -----------------------------------------------------------------------
 # ----------------------------------------------------------------------------
 # source /Users/daniel.blum/.rvm/scripts/rvm
 export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES #issue with checkov
 
-
 # Terraform ------------------------------------------------------------------
 # ----------------------------------------------------------------------------
 # You're using `tfswitch` to manage TF versions
-export TF_VERSION=1.9.6
+export TF_VERSION=1.14
 export TF_PRODUCT="terraform"
 
 # Node -----------------------------------------------------------------------
@@ -218,12 +105,8 @@ export TF_PRODUCT="terraform"
 # THIS IS DECLARED IN `.zshrc` AT THE END OF THE FILE.
 # someting was setting a system version of node so this was never picked
 # Volta (for managing tools) https://docs.volta.sh/guide/getting-started
-# export VOLTA_HOME="$XDG_DATA_HOME/volta"
-# export PATH="$VOLTA_HOME/bin:$PATH"
-
-end_measure "language configs"
-
-start_measure "program configs"
+export VOLTA_HOME="$XDG_DATA_HOME/volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
 
 # kubectl --------------------------------------------------------------------
 export KUBECONFIG="${XDG_CONFIG_HOME}/kube/config"
@@ -231,17 +114,11 @@ export KUBECONFIG="${XDG_CONFIG_HOME}/kube/config"
 # AWS config/credential ------------------------------------------------------
 export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
 export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
-# export AWS_PROFILE='garage-sandbox'
 
 # VS Code --------------------------------------------------------------------
 # ----------------------------------------------------------------------------
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
 
-# iTerm 2---------------------------------------------------------------------
-# ----------------------------------------------------------------------------
-# export DARK_PROFILE="CutiePro"
-# export LIGHT_PROFILE="GitHub-Light-Colorblind"
-# export CURRENT_ITERM2_PROFILE="${DARK_PROFILE}"
 
 # bat ------------------------------------------------------------------------
 # ----------------------------------------------------------------------------
@@ -254,8 +131,11 @@ export BAT_PAGER="less -RFX"
 # ----------------------------------------------------------------------------
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
-end_measure "program configs"
 
-end_measure "zshenv total"
+# cloudsmith -----------------------------------------------------------------
+# ----------------------------------------------------------------------------
+export CLOUDSMITH_USERNAME="daniel-blum"
 
-
+# bottom of the page ---------------------------------------------------------
+# ----------------------------------------------------------------------------
+export PATH="$PATH:/Users/daniel.blum/.local/bin"

@@ -7,7 +7,6 @@
 # zstyle ':completion:*:*:docker-*:*' option-stacking yes
 # 
 
-start_measure "zstyles total"
 
 # Should be called before compinit
 zmodload zsh/complist
@@ -135,4 +134,3 @@ then
   FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 fi
 
-end_measure "zstyles total"

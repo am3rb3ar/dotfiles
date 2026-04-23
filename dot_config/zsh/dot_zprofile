@@ -6,10 +6,3 @@
 # 3. .zshrc for interactive shell
 # 4. .zlogin for login POST interactive
 # 5. .zlogout for login out
-
-
-start_measure "zprofile"
-end_measure "zprofile"
-
-
-eval "$(/opt/homebrew/bin/brew shellenv)"
