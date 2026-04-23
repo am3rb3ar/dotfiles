@@ -1,0 +1,5 @@
+# Universal environment variables
+
+{{ if .work -}}
+[[ -f "$ZDOTDIR/netskope.zsh" ]] && source "$ZDOTDIR/netskope.zsh"
+{{- end }}
