@@ -1,0 +1,89 @@
+# https://blog.gitbutler.com/how-git-core-devs-configure-git/
+
+[user]
+	name = Daniel Blum
+	email = daniel.blum@analog.com
+	signingkey = 19AF5CCC2E7C282C
+
+[branch]
+  sort = -committerdate
+[color]
+  ui = true
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+  func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
+[column]
+  ui = auto
+[commit]
+  verbose = true
+	gpgsign = true
+[core]
+  editor = nvim
+	excludesfile = /Users/Daniel.Blum/.config/git/ignore
+  # https://github.com/so-fancy/diff-so-fancy
+  #pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
+  # file optimization stuff for BIG repos
+  fsmonitor = true
+  untrackedCache = true
+[delta]
+  # https://dandavison.github.io/delta/introduction.html
+  colorMoved = default
+  navigate = true
+  line-numbers = true
+  true-color = always
+[diff]
+  algorithm = histogram
+  colorMoved = plain
+  mnemonicPrefix = true
+  renames = true
+[fetch]
+  prune = true
+  pruneTags = true
+	tags = false
+	tagOpt = --no-tags
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[help]
+  autocorrect = prompt
+[init]
+	defaultBranch = main
+[interactive]
+	# diffFilter = diff-so-fancy --patch
+  diffFilter = delta --color-only
+[merge]
+  conflictstyle = zdiff3 
+[pull]
+  # rebase = true
+[push]
+  default = simple
+  # autoSetupRemote = true
+  # followTags = true
+[rebase]
+  autoSquash = true
+  autoStash = true
+  updateRefs = true
+[rerere]
+  enabled = true
+  autoupdate = true
+[tag]
+  sort = -version:refname
+	pgpSign = true
+
+[includeIf "gitdir:~/Code/personal/"]
+	path = ~/.config/git/config-personal
+
+[alias]
+	l = "log --pretty=oneline -n 10"
+  diff-ss = -c delta.features=side-by-side diff
+	aliases = config --get-regexp '^alias\\.'
+[remote "origin"]
+	tagOpt = --no-tags

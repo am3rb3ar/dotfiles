@@ -1,0 +1,13 @@
+layout {
+    pane size=1 borderless=true {
+        plugin location="file:~/.config/zellij/plugins/zellaude.wasm"
+    }
+    pane
+    pane split_direction="vertical" {
+        pane
+        pane command="claude"
+    }
+    pane size=1 borderless=true {
+        plugin location="status-bar"
+    }
+}

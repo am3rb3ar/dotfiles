@@ -1,0 +1,50 @@
+# theme = UltraDark
+# theme = dark:"Monokai Pro Spectrum",light:"Monokai Pro Light Sun"
+# theme = dark:"Monokai Pro Spectrum",light:"Breadog"
+# theme = "Breadog"
+# theme = light:Blue Dolphin,dark:Monokai Pro Spectrum
+# theme = Blue Dolphin
+theme = dark:Citruszest,light:Blue Dolphin
+
+
+
+
+# font-family = "Mononoki Nerd Font Mono"
+# font-family = "NotoMono Nerd Font Mono"
+# font-family = "Monofur Nerd Font Mono"
+font-family = "RobotoMono Nerd Font Mono"
+font-size = 16
+font-thicken = true
+font-thicken-strength = 200
+bold-is-bright = true
+
+
+initial-window = true
+
+# background-opacity = 1
+# background-blur = true
+# unfocused-split-opacity = 0.85
+
+macos-option-as-alt = true
+macos-window-shadow = false
+macos-auto-secure-input = true
+macos-secure-input-indication = true
+window-decoration = true
+window-theme = dark
+
+# operations
+quit-after-last-window-closed = false
+
+# shell integration
+shell-integration = detect
+shell-integration-features = cursor, sudo, title
+
+# ghost terminal
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+quick-terminal-position = bottom
+quick-terminal-size = 20%,20%
+quick-terminal-animation-duration = 0.2
+quick-terminal-autohide = true
+quick-terminal-screen = macos-menu-bar
+quick-terminal-space-behavior = move
+quick-terminal-keyboard-interactivity = on-demand
