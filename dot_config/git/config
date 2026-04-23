@@ -3,7 +3,7 @@
 [user]
 	name = Daniel Blum
 	email = daniel.blum@analog.com
-	signingkey = 19AF5CCC2E7C282C
+	signingkey = E90F819BB088568D
 
 [branch]
   sort = -committerdate
@@ -25,8 +25,6 @@
 [core]
   editor = nvim
 	excludesfile = /Users/Daniel.Blum/.config/git/ignore
-  # https://github.com/so-fancy/diff-so-fancy
-  #pager = diff-so-fancy | less --tabs=4 -RFX
   pager = delta
   # file optimization stuff for BIG repos
   fsmonitor = true
@@ -79,6 +77,8 @@
 	pgpSign = true
 
 [includeIf "gitdir:~/Code/personal/"]
+	path = ~/.config/git/config-personal
+[includeIf "gitdir:~/.local/share/chezmoi"]
 	path = ~/.config/git/config-personal
 
 [alias]
