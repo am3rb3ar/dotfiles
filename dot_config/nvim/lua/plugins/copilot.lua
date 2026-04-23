@@ -1,0 +1,71 @@
+return {
+  --
+  -- ---@module 'lazy'
+  -- ---@type LazySpec
+  -- {
+  --   "zbirenbaum/copilot.lua",
+  --   dependencies = {
+  --     "copilotlsp-nvim/copilot-lsp", -- (optional) for NES functionality
+  --   },
+  --   event = { "BufReadPost" },
+  --   cmd = { "Copilot" },
+  --   build = ":Copilot auth",
+  --   opts = {
+  --     suggestion = {
+  --       enable = not vim.g.ai_cmp,
+  --       auto_trigger = true,
+  --       hide_during_completion = vim.g.ai_cmp,
+  --       keymap = {
+  --         accept = false, -- handled by nvim-cmp / blink.cmp
+  --         next = "<M-]>",
+  --         prev = "<M-[>",
+  --       },
+  --       panel = { enabled = false },
+  --       filetypes = {
+  --         markdown = true,
+  --         help = true,
+  --       },
+  --     }
+  --     -- nes = {
+  --     --   enabled = true,
+  --     --   keymap = {
+  --     --     accept_and_goto = "<leader>p",
+  --     --     accept = false,
+  --     --     dismiss = "<Esc>",
+  --     --   },
+  --     -- },
+  --   },
+  -- },
+  -- ---@module 'lazy'
+  -- ---@type LazySpec
+  -- {
+  --   "CopilotC-Nvim/CopilotChat.nvim",
+  --   dependencies = {
+  --     { "nvim-lua/plenary.nvim", branch = "master" },
+  --   },
+  --   build = "make tiktoken",
+  --   ---@module 'CopilotChat'
+  --   ---@type CopilotChat.config.Config
+  --   opts = {
+  --     window = {
+  --       layout = 'float',
+  --       width = 80, -- Fixed width in columns
+  --       height = 20, -- Fixed height in rows
+  --       border = 'rounded', -- 'single', 'double', 'rounded', 'solid'
+  --       title = '🤖 AI Assistant',
+  --       zindex = 100, -- Ensure window stays on top
+  --     },
+  --
+  --     headers = {
+  --       user = '👤 You',
+  --       assistant = '🤖 Copilot',
+  --       tool = '🔧 Tool',
+  --     },
+  --
+  --     separator = '━━',
+  --     auto_fold = true, -- Automatically folds non-assistant messages
+  --     ---@type CopilotChat.config.mappings
+  --   },
+  -- },
+}
+

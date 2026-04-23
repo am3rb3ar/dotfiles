@@ -1,0 +1,55 @@
+-- https://www.johntobin.ie/blog/debugging_in_neovim_with_nvim-dap/
+return {
+  -- {
+  --   'mfussenegger/nvim-dap',
+  --   dependencies = {
+  --     {
+  --       "rcarriga/nvim-dap-ui",
+  --       dependencies = {
+  --         "nvim-neotest/nvim-nio",
+  --         {
+  --           "theHamsta/nvim-dap-virtual-text",
+  --           opts = {},
+  --         },
+  --       },
+  --       keys = require('config.keys').dap_ui_keymappings(),
+  --     },
+  --   },
+  --   keys = require('config.keys').dap_keymaps(),
+  -- },
+  -- {
+  --   "jay-babu/mason-nvim-dap.nvim",
+  --   dependencies = {
+  --     "mfussenegger/nvim-dap",
+  --     "williamboman/mason.nvim",
+  --   },
+  --   cmd = { "DapInstall", "DapUninstall" },
+  --   ---@type MasonNvimDapSettings
+  --   opts = {
+  --     handlers = {},
+  --     automatic_installation = {
+  --       -- These will be configured by separate plugins.
+  --       exclude = {
+  --         "python",
+  --       },
+  --     },
+  --     ensure_installed = {
+  --       -- "bash",
+  --       -- "codelldb",
+  --       -- "php",
+  --       -- "python",
+  --     },
+  --   },
+  -- },
+  -- {
+  --   "mfussenegger/nvim-dap-python",
+  --   lazy = true,
+  --   dependencies = {
+  --     "mfussenegger/nvim-dap",
+  --   },
+  --   config = function()
+  --     require("dap-python").setup("uv")
+  --   end,
+  --   keys = require('config.keys').python_dap_keymappings()
+  -- },
+}
