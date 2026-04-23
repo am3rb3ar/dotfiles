@@ -1,5 +1,6 @@
 {{ if not (default false .work) -}}
 dot_config/fish/conf.d/private_netskope.fish
+dot_claude/**
 {{- end }}
 {{ if not (default false .configure_zsh) -}}
 dot_config/zsh/**

@@ -1,0 +1,29 @@
+{
+  "$schema": "https://www.schemastore.org/claude-code-keybindings.json",
+  "$docs": "https://code.claude.com/docs/en/keybindings",
+  "bindings": [
+    {
+      "context": "Global",
+      "bindings": {
+        "ctrl+space ctrl+r": "app:redraw",
+        "ctrl+shift+t": "app:toggleTodos",
+        "ctrl+shift+o": "app:toggleTranscript"
+      }
+    },
+    {
+      "context": "Chat",
+      "bindings": {
+        "shift+enter": "chat:newline"
+      }
+    },
+    { 
+      "context": "Scroll",
+      "bindings": {
+        "alt+up": "scroll:lineUp",
+        "alt+down": "scroll:lineDown",
+        "alt+shift+up": "scroll:halfPageUp",
+        "alt+shift+down": "scroll:halfPageDown"
+      }
+    }
+  ]
+}
