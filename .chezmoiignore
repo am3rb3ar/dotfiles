@@ -2,6 +2,7 @@
 dot_config/fish/conf.d/private_netskope.fish
 dot_config/zsh/private_netskope.zsh
 dot_claude/**
+dot_config/opencode/**
 {{- end }}
 {{ if not (default false .configure_zsh) -}}
 dot_config/zsh/**

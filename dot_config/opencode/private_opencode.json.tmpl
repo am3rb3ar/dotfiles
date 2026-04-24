@@ -18,7 +18,7 @@
       "options": {
         "baseURL": "https://api.portkey.ai/v1",
         "headers": {
-          "x-portkey-api-key": "REDACTED"
+          "x-portkey-api-key": "{{ onepasswordRead "op://Employee/Portkey/credential" }}"
         }
       },
       "models": {
@@ -37,8 +37,7 @@
         "@azure-openai-eus2-global/gpt-5.2-dzs": {
           "name": "gpt-5.2"
         }
-
-       }
-     }
-   }
- }
+      }
+    }
+  }
+}
