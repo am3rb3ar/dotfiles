@@ -197,13 +197,13 @@
       "key": "│    Locale:{$1} │",
       "keyColor": "38;2;61;174;233"
     },
-    {
-      "type": "weather",
-      "key": "│   Weather:{$1} │",
-      "keyColor": "38;2;61;174;233",
-      "format": "{1:-48}",
-      "timeout": 3000
-    },
+    // {
+    //   "type": "weather",
+    //   "key": "│   Weather:{$1} │",
+    //   "keyColor": "38;2;61;174;233",
+    //   "format": "{1:-48}",
+    //   "timeout": 3000
+    // },
     {
       "type": "custom",
       "format": "╰──{$5}{$4}┬─ {#black} {#red} {#green} {#yellow} {#blue} {#magenta} {#cyan} {#white}{#38;2;61;174;233} ─┤",

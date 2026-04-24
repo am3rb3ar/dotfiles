@@ -215,8 +215,3 @@ export BAT_THEME="Dracula"
 
 ## GPG
 export GPG_TTY=$(tty)
-
-# ----------------------------------------------------------------------------
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/daniel.blum/Library/Application Support/sdkman"
-[[ -s "/Users/daniel.blum/Library/Application Support/sdkman/bin/sdkman-init.sh" ]] && source "/Users/daniel.blum/Library/Application Support/sdkman/bin/sdkman-init.sh"

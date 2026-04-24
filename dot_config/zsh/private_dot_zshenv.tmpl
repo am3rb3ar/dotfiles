@@ -44,15 +44,6 @@ export CPPFLAGS="$openssl_cpp_flag $libpq_cpp_flag $zlib_cpp_flag"
 
 export CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
 
-# Rust
-export RUSTUP_HOME="${XDG_CONFIG_HOME}/rustup"
-export CARGO_HOME="${XDG_CONFIG_HOME}/cargo"
-export PATH="${CARGO_HOME}/bin:$PATH"
-source "${CARGO_HOME}/env"
-
-# Java
-export SDKMAN_DIR="$HOME/Library/Application Support/sdkman"
-
 # Go
 export GOPATH="$HOME/.local/share/go"
 export PATH="$GOPATH/bin:$PATH"
@@ -96,4 +87,3 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 export CLOUDSMITH_USERNAME="daniel-blum"
 
 export PATH="$PATH:$HOME/.local/bin"
-
