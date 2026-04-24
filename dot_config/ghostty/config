@@ -20,14 +20,14 @@ font-thicken = true
 font-thicken-strength = 200
 bold-is-bright = true
 
-
 initial-window = false
+window-inherit-working-directory = false
 
 # background-opacity = 1
 # background-blur = true
 # unfocused-split-opacity = 0.85
 
-macos-option-as-alt = true
+macos-option-as-alt = left
 macos-window-shadow = false
 macos-auto-secure-input = true
 macos-secure-input-indication = true

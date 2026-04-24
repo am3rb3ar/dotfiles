@@ -8,7 +8,7 @@
 # 4. .zlogin for login POST interactive
 # 5. .zlogout for login out
 
-fastfetch
+# fastfetch
 
 ## Navigation options
 setopt AUTO_CD              # Go to folder path without using cd.
@@ -38,7 +38,7 @@ setopt HIST_VERIFY               # Do not execute immediately upon history expan
 alias bash='/opt/homebrew/bin/bash'
 
 # starship prompt
-eval "$(starship init zsh)"
+# eval "$(starship init zsh)"
 
 # ----------------------------------------------------------------------------
 ## fpath and function loading ------------------------------------------------
