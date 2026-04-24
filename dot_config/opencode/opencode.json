@@ -1,0 +1,44 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "portkey/@bedrock-global/us.anthropic.claude-sonnet-4-6",
+  "permission": {
+    "*": "ask",
+    "doom_loop": "deny",
+    "glob": "allow",
+    "list": "allow",
+    "lsp": "allow",
+    "read": "allow",
+    "todoread": "allow",
+    "todowrite": "allow"
+  },
+  "provider": {
+    "portkey": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Portkey",
+      "options": {
+        "baseURL": "https://api.portkey.ai/v1",
+        "headers": {
+          "x-portkey-api-key": "REDACTED"
+        }
+      },
+      "models": {
+        "@bedrock-global/us.anthropic.claude-opus-4-6-v1": {
+          "name": "claude-opus-4.6"
+        },
+        "@bedrock-global/us.anthropic.claude-sonnet-4-6": {
+          "name": "claude-sonnet-4.6"
+        },
+        "@bedrock-global/us.anthropic.claude-haiku-4-5-20251001-v1:0": {
+          "name": "claude-haiku-4.5"
+        },
+        "@vertexai-global/gemini-2.5-pro": {
+          "name": "gemini-2.5-pro"
+        },
+        "@azure-openai-eus2-global/gpt-5.2-dzs": {
+          "name": "gpt-5.2"
+        }
+
+       }
+     }
+   }
+ }
