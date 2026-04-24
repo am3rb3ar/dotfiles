@@ -214,10 +214,15 @@ l = ['join-with right', 'mode main']
 # other = 'secondary'
 # calls = 'secondary'
 
-
-
-
 ## CALLBACKS
+
+# fix for ghostty terminal rendering tabs as seperate windows
+# https://ghostty.org/docs/help/macos-tiling-wms
+[[on-window-detected]]
+if.app-id="com.mitchellh.ghostty"
+run= [
+  "layout tiling",
+]
 
 # allow DropDown iterm2 terminal to work
 # note - sometimes you'll flash to another iterm terminal if you have one open.
@@ -286,10 +291,3 @@ if.window-title-regex-substring = 'CleanMyMac'
 check-further-callbacks = true
 run = 'layout floating'
 
-# fix for ghostty terminal rendering tabs as seperate windows
-# https://ghostty.org/docs/help/macos-tiling-wms
-# NOTE: as of now, this is not helping.... but its not hurting either
-[[on-window-detected]]
-if.app-id = "com.mitchellh.ghostty"
-check-further-callbacks = true
-run= "layout tiling"

@@ -3,8 +3,10 @@
 # theme = dark:"Monokai Pro Spectrum",light:"Breadog"
 # theme = "Breadog"
 # theme = light:Blue Dolphin,dark:Monokai Pro Spectrum
+#
+# theme = dark:Citruszest,light:Blue Dolphin
 # theme = Blue Dolphin
-theme = dark:Citruszest,light:Blue Dolphin
+theme = Citruszest
 
 
 
@@ -19,7 +21,7 @@ font-thicken-strength = 200
 bold-is-bright = true
 
 
-initial-window = true
+initial-window = false
 
 # background-opacity = 1
 # background-blur = true
@@ -41,8 +43,8 @@ shell-integration-features = cursor, sudo, title
 
 # ghost terminal
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
-quick-terminal-position = bottom
-quick-terminal-size = 20%,20%
+quick-terminal-position = top
+quick-terminal-size = 50%,90%
 quick-terminal-animation-duration = 0.2
 quick-terminal-autohide = true
 quick-terminal-screen = macos-menu-bar
