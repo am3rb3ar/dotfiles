@@ -1,0 +1,99 @@
+# .zshenv
+#
+# Order of Operations:
+# 1. .zshenv
+# 2. .zprofile for login shell
+# 3. .zshrc for interactive shell
+# 4. .zlogin for login POST interactive
+# 5. .zlogout for login out
+
+# XDG Base Directory
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
+# ZSH Config location
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+
+
+{{ if .work -}}
+# Netskope Config
+[[ -f "$ZDOTDIR/netskope.zsh" ]] && source "$ZDOTDIR/netskope.zsh"
+{{- end }}
+
+export EDITOR="$HOME/.local/bin/nvim-wrapper"
+export VISUAL="$HOME/.local/bin/nvim-wrapper"
+
+export HISTFILE="$XDG_CACHE_HOME/zhistory"
+export HISTSIZE=10000
+export SAVEHIST=10000
+
+# Homebrew
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+openssl_ld_flag="-Wl,-rpath,$(brew --prefix openssl)/lib"
+libpq_ld_flag="-L/opt/homebrew/opt/libpq/lib"
+zlib_ld_flag="-L/opt/homebrew/opt/zlib/lib"
+export LDFLAGS="$openssl_ld_flag $libpq_ld_flag $zlib_ld_flag"
+
+openssl_cpp_flag="-Wl,-rpath,$(brew --prefix openssl)/lib"
+libpq_cpp_flag="-I/opt/homebrew/opt/libpq/include"
+zlib_cpp_flag="-I/opt/homebrew/opt/zlib/include"
+export CPPFLAGS="$openssl_cpp_flag $libpq_cpp_flag $zlib_cpp_flag"
+
+export CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
+
+# Rust
+export RUSTUP_HOME="${XDG_CONFIG_HOME}/rustup"
+export CARGO_HOME="${XDG_CONFIG_HOME}/cargo"
+export PATH="${CARGO_HOME}/bin:$PATH"
+source "${CARGO_HOME}/env"
+
+# Java
+export SDKMAN_DIR="$HOME/Library/Application Support/sdkman"
+
+# Go
+export GOPATH="$HOME/.local/share/go"
+export PATH="$GOPATH/bin:$PATH"
+
+# Pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+
+# uv
+export UV_PYTHON_PREFERENCE="system"
+
+# Ruby
+export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES
+
+# Terraform
+export TF_VERSION=1.14
+export TF_PRODUCT="terraform"
+
+# Node/Volta
+export VOLTA_HOME="$XDG_DATA_HOME/volta"
+export PATH="$VOLTA_HOME/bin:$PATH"
+
+# kubectl
+export KUBECONFIG="${XDG_CONFIG_HOME}/kube/config"
+
+# AWS
+export AWS_CONFIG_FILE="$XDG_CONFIG_HOME/aws/config"
+export AWS_SHARED_CREDENTIALS_FILE="$XDG_CONFIG_HOME/aws/credentials"
+
+# VS Code
+export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
+
+# bat
+export BAT_CONFIG_DIR="${XDG_CONFIG_HOME}/bat"
+export BAT_CONFIG_PATH="${BAT_CONFIG_DIR}/bat.conf"
+export BAT_PAGER="less -RFX"
+
+# fzf
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
+# CloudSmith
+export CLOUDSMITH_USERNAME="daniel-blum"
+
+export PATH="$PATH:$HOME/.local/bin"
+
