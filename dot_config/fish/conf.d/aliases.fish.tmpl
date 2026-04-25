@@ -1,0 +1,21 @@
+{{ if eq .chezmoi.os "darwin" -}}
+# Since OSX is using an old bash, we're going to update it
+alias bash='/opt/homebrew/bin/bash'
+{{ end -}}
+
+# ls
+alias l="eza -l"
+alias la="eza -la"
+alias tree="eza -T"
+
+# editor
+alias nv="nvim"
+
+# zellij
+alias zj="zellij"
+
+# chezmoi
+alias chez="chezmoi"
+alias cheze="chezmoi edit"
+alias cheza="chezmoi apply"
+alias chezcd="cd $(chezmoi source-path)"

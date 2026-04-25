@@ -9,7 +9,7 @@ theme = light:Blue Dolphin,dark:Citruszest
 # theme = Citruszest
 
 font-family = "Hack Nerd Font Mono"
-font-size = 16
+font-size = 14
 font-thicken = true
 font-thicken-strength = 200
 bold-is-bright = true
