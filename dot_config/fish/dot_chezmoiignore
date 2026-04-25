@@ -1,3 +1,0 @@
-{{ if (default false .work }}
-conf.d/netskope.fish
-{{- end }}
