@@ -1,0 +1,3 @@
+{{ if (default false .work }}
+conf.d/private_netskope.fish
+{{- end }}

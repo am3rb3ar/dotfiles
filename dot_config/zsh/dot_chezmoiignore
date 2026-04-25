@@ -5,3 +5,6 @@
 .zcompdump*
 .zhistory
 plugins/*
+{{ if (default false .work) -}}
+private_dot_zshenv.tmpl
+{{- end }}

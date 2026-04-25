@@ -16,7 +16,7 @@ export XDG_STATE_HOME="$HOME/.local/state"
 # ZSH Config location
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-{{ if .work -}}
+{{ if (default false .work) -}}
 # Netskope Config
 [[ -f "$ZDOTDIR/netskope.zsh" ]] && source "$ZDOTDIR/netskope.zsh"
 {{- end }}
