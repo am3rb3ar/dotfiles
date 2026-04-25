@@ -1,1 +1,1 @@
-/Users/daniel.blum/.config/nvim/lua/config/options.lua
+../../../nvim/lua/config/options.lua
