@@ -4,35 +4,35 @@
 # theme = "Breadog"
 # theme = light:Blue Dolphin,dark:Monokai Pro Spectrum
 #
-# theme = dark:Citruszest,light:Blue Dolphin
+theme = light:Blue Dolphin,dark:Citruszest
 # theme = Blue Dolphin
-theme = Citruszest
+# theme = Citruszest
 
-
-
-
-# font-family = "Mononoki Nerd Font Mono"
-# font-family = "NotoMono Nerd Font Mono"
-# font-family = "Monofur Nerd Font Mono"
-font-family = "RobotoMono Nerd Font Mono"
+font-family = "Hack Nerd Font Mono"
 font-size = 16
 font-thicken = true
 font-thicken-strength = 200
 bold-is-bright = true
 
+# window stuff
 initial-window = false
+window-theme = auto
 window-inherit-working-directory = false
-
-# background-opacity = 1
-# background-blur = true
-# unfocused-split-opacity = 0.85
-
-macos-option-as-alt = left
-macos-window-shadow = false
-macos-auto-secure-input = true
-macos-secure-input-indication = true
 window-decoration = true
-window-theme = dark
+window-padding-x = 8
+window-padding-y = 8
+
+# zellij unbinds
+keybind = cmd+t=unbind
+keybind = cmd+n=unbind
+keybind = cmd+c=unbind
+keybind = cmd+w=unbind
+keybind = cmd+opt+left=unbind
+keybind = cmd+opt+right=unbind
+keybind = ctrl+enter=unbind
+
+background-opacity = 0.83
+background-blur = true
 
 # operations
 quit-after-last-window-closed = false
@@ -41,12 +41,19 @@ quit-after-last-window-closed = false
 shell-integration = detect
 shell-integration-features = cursor, sudo, title
 
-# ghost terminal
+# quick terminal
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 quick-terminal-position = top
-quick-terminal-size = 50%,90%
+quick-terminal-size = 55%,94%
 quick-terminal-animation-duration = 0.2
 quick-terminal-autohide = true
 quick-terminal-screen = macos-menu-bar
 quick-terminal-space-behavior = move
 quick-terminal-keyboard-interactivity = on-demand
+
+# osx specific operations
+macos-option-as-alt = left
+macos-window-shadow = false
+macos-auto-secure-input = true
+macos-secure-input-indication = true
+

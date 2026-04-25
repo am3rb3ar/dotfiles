@@ -11,15 +11,6 @@
     "ENABLE_TOOL_SEARCH": "0"
   },
   "includeCoAuthoredBy": true,
-  "tui": "fullscreen",
-  "extraKnownMarketplaces": {
-    "adi-innersource": {
-      "source": {
-        "source": "git",
-        "url": "https://github.com/adi-innersource/enterprise-claude-plugins.git"
-      }
-    }
-  },
   "hooks": {
     "Notification": [
       {
@@ -37,7 +28,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -59,7 +50,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -71,7 +62,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -83,7 +74,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -95,7 +86,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -107,7 +98,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -119,7 +110,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -131,7 +122,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -143,7 +134,7 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
@@ -155,12 +146,22 @@
         "hooks": [
           {
             "type": "command",
-            "command": "{{ .chezmoi.homeDir }}/.config/zellij/plugins/zellaude-hook.sh",
+            "command": "/Users/daniel.blum/.config/zellij/plugins/zellaude-hook.sh",
             "timeout": 5,
             "async": true
           }
         ]
       }
     ]
-  }
+  },
+  "extraKnownMarketplaces": {
+    "adi-innersource": {
+      "source": {
+        "source": "github",
+        "url": "https://github.com/adi-innersource/enterprise-claude-plugins.git",
+        "repo": "adi-innersource/enterprise-claude-plugins"
+      }
+    }
+  },
+  "tui": "fullscreen"
 }
