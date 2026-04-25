@@ -1,8 +1,10 @@
 # no more greeting
 set -g fish_greeting ""
 
+{{ if eq .chezmoi.os "darwin" -}}
 # homebrew
 /opt/homebrew/bin/brew shellenv | source
+{{- end -}}
 
 # local scripts
 fish_add_path "$HOME/.local/bin"
