@@ -9,6 +9,8 @@ return {
       -- https://github.com/nvim-treesitter/nvim-treesitter/blob/main/SUPPORTED_LANGUAGES.md
       "bash",
       "zsh",
+      "fish",
+      "nu",
     },
     sync_install = false,
     auto_install = true,
