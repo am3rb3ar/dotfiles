@@ -1,6 +1,8 @@
 {
   "$schema": "https://opencode.ai/config.json",
+  {{ if (default false .work) -}}
   "model": "portkey/@bedrock-global/us.anthropic.claude-sonnet-4-6",
+  {{- end }}
   "permission": {
     "*": "ask",
     "doom_loop": "deny",
@@ -12,6 +14,7 @@
     "todowrite": "allow"
   },
   "provider": {
+    {{ if (default false .work) -}}
     "portkey": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "Portkey",
@@ -39,5 +42,6 @@
         }
       }
     }
+  {{- end }}
   }
 }

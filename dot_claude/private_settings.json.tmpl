@@ -1,12 +1,14 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-settings.json",
   "env": {
+    {{ if (default false .work) -}} 
     "ANTHROPIC_BASE_URL": "https://api.portkey.ai",
     "ANTHROPIC_AUTH_TOKEN": "portkey",
     "ANTHROPIC_DEFAULT_OPUS_MODEL": "@bedrock-global/us.anthropic.claude-opus-4-6-v1",
     "ANTHROPIC_DEFAULT_SONNET_MODEL": "@bedrock-global/us.anthropic.claude-sonnet-4-6",
     "ANTHROPIC_DEFAULT_HAIKU_MODEL": "@bedrock-global/us.anthropic.claude-haiku-4-5-20251001-v1:0",
     "ANTHROPIC_CUSTOM_HEADERS": "x-portkey-api-key: {{ onepasswordRead "op://Employee/Portkey/credential" }}",
+    {{- end }}
     "CLAUDE_CODE_DISABLE_EXPERIMENTAL_BETAS": "1",
     "ENABLE_TOOL_SEARCH": "0"
   },
@@ -155,6 +157,7 @@
     ]
   },
   "extraKnownMarketplaces": {
+    {{ if (default false .work) -}}
     "adi-innersource": {
       "source": {
         "source": "github",
@@ -162,6 +165,7 @@
         "repo": "adi-innersource/enterprise-claude-plugins"
       }
     }
+    {{- end }}
   },
   "tui": "fullscreen"
 }
