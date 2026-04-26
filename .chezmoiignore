@@ -1,3 +1,4 @@
+README.md
 {{ if not (default false .work) -}}
 .config/fish/conf.d/netskope.fish
 .config/zsh/netskope.zsh
