@@ -339,7 +339,8 @@ web_client {
 // Default: default
 // 
 // theme "molokai-dark"
-theme "catppuccin-latte"
+// theme "catppuccin-latte"
+theme "ansi"
  
 // Choose the base input mode of zellij.
 // Default: normal

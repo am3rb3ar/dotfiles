@@ -4,7 +4,7 @@
 # theme = "Breadog"
 # theme = light:Blue Dolphin,dark:Monokai Pro Spectrum
 #
-theme = light:Blue Dolphin,dark:Citruszest
+theme = light:Dayfox,dark:Duskfox
 # theme = Blue Dolphin
 # theme = Citruszest
 
@@ -41,6 +41,7 @@ quit-after-last-window-closed = false
 shell-integration = detect
 shell-integration-features = cursor, sudo, title
 
+{{- if eq .chezmoi.os "darwin" }}
 # quick terminal
 keybind = global:ctrl+grave_accent=toggle_quick_terminal
 quick-terminal-position = top
@@ -56,4 +57,4 @@ macos-option-as-alt = left
 macos-window-shadow = false
 macos-auto-secure-input = true
 macos-secure-input-indication = true
-
+{{- end -}}
