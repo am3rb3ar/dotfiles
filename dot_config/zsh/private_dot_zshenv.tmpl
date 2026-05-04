@@ -44,8 +44,9 @@ export CPPFLAGS="$openssl_cpp_flag $libpq_cpp_flag $zlib_cpp_flag"
 export CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
 
 # Go
-export GOPATH="$HOME/.local/share/go"
-export PATH="$GOPATH/bin:$PATH"
+export GOENV_ROOT="$HOME/.goenv"
+export PATH="$GOENV_ROOT/bin:$PATH"
+eval "$(goenv init -)"
 
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"

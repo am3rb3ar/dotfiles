@@ -35,6 +35,8 @@
   navigate = true
   line-numbers = true
   true-color = always
+  syntax-theme = zenburn
+  dark = true
 [diff]
   algorithm = histogram
   colorMoved = plain
@@ -76,9 +78,9 @@
   sort = -version:refname
 	pgpSign = true
 
-[includeIf "gitdir:~/Code/personal/"]
+[includeIf "gitdir:/Users/daniel.blum/Code/personal/"]
 	path = ~/.config/git/config-personal
-[includeIf "gitdir:~/.local/share/chezmoi"]
+[includeIf "gitdir:/Users/daniel.blum/.local/share/chezmoi/"]
 	path = ~/.config/git/config-personal
 
 [alias]

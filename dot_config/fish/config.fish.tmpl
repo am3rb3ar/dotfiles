@@ -9,22 +9,24 @@ set -g fish_greeting ""
 # local scripts
 fish_add_path "$HOME/.local/bin"
 
-command -q fzf && fzf --fish | source
-# --no-rehash skips the expensive rehash subprocess on every shell start;
-# run `pyenv rehash` / `goenv rehash` / `rbenv rehash` manually after installing a new version
-command -q pyenv && pyenv init - --no-rehash fish | source
-command -q goenv && goenv init - --no-rehash fish | source
-command -q rbenv && rbenv init - --no-rehash fish | source
-
 if status is-interactive
   # command -q zellij && zellij setup --generate-auto-start fish | string collect | source
 
   fish_vi_key_bindings
   command -q fastfetch && fastfetch
 
+  # --no-rehash skips the expensive rehash subprocess on every shell start;
+  # run `pyenv rehash` / `goenv rehash` / `rbenv rehash` manually after installing a new version
+  command -q pyenv && pyenv init - --no-rehash fish | source
+  command -q goenv && goenv init - --no-rehash fish | source
+  command -q rbenv && rbenv init - --no-rehash fish | source
+
 
   # better cd: https://github.com/ajeetdsouza/zoxide
   command -q zoxide && zoxide init fish | source
+
+  # good searching
+  command -q fzf && fzf --fish | source
 
   # worktrunk: https://github.com/max-sixty/worktrunk
   # cache worktrunk completions
@@ -38,8 +40,9 @@ if status is-interactive
 
   # fzf.fish key bindings
   # functions -q fzf_configure_bindings && fzf_configure_bindings --variables=ctrl-alt-v --history=ctrl-alt-r
-  fzf_configure_bindings --variables=ctrl-alt-v --history=ctrl-alt-r
+  # fzf_configure_bindings --variables=ctrl-alt-v --history=ctrl-alt-r
 
   # status line: https://starship.rs/
   command -q starship && starship init fish | source
+
 end
