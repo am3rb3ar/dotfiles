@@ -76,10 +76,11 @@ vim.api.nvim_create_user_command(
   virtual_lines,
   {
     nargs = 1,
-    complete = function() return {"start", "stop"} end,
+    complete = function() return {"start", "stop", "toggle"} end,
     desc = "..."
   }
 )
+vim.api.nvim_create_user_command("ToggleVirtualLines", function() virtual_lines("toggle") end, {})
 
 local diagflow_enabled = true
 local diagflow = function(opts)
@@ -113,36 +114,45 @@ vim.api.nvim_create_user_command(
   diagflow,
   {
     nargs = 1,
-    complete = function() return {"start", "stop"} end,
+    complete = function() return {"start", "stop", "toggle"} end,
     desc = "..."
   }
 )
+vim.api.nvim_create_user_command("ToggleDiagflow", function() diagflow("toggle") end, {})
 
-vim.api.nvim_create_user_command("Diagnostic", function(opts)
-  local args = opts.args
+vim.api.nvim_create_user_command(
+  "Diagnostic",
+  function(opts)
+    local args = opts.args
 
-  local switch = {
-    ['start'] = function()
-      diagflow({args = "start"})
-      virtual_lines({args = "start"})
-    end,
-    ['stop'] = function()
-      diagflow({args = "stop"})
-      virtual_lines({args = "stop"})
-    end,
-    ['toggle'] = function()
-      if not (diagflow_enabled or virtuallines_enabled) then
-        vim.notify("Both Diagflow and ViruatlLines are disabled", vim.log.levels.WARN)
-      else
-        diagflow({args = "toggle"})
-        virtual_lines({args = "toggle"})
-      end
-    end,
-  }
+    local switch = {
+      ['start'] = function()
+        diagflow({args = "start"})
+        virtual_lines({args = "start"})
+      end,
+      ['stop'] = function()
+        diagflow({args = "stop"})
+        virtual_lines({args = "stop"})
+      end,
+      ['toggle'] = function()
+        if not (diagflow_enabled or virtuallines_enabled) then
+          vim.notify("Both Diagflow and ViruatlLines are disabled", vim.log.levels.WARN)
+        else
+          diagflow({args = "toggle"})
+          virtual_lines({args = "toggle"})
+        end
+      end,
+    }
 
-  if switch[args] then
-    switch[args]()
-  else
-    vim.notify("Diagnostic: Not a valid option", vim.log.levels.WARN)
-  end
-end, { nargs = 1, desc = "..." } )
+    if switch[args] then
+      switch[args]()
+    else
+      vim.notify("Diagnostic: Not a valid option", vim.log.levels.WARN)
+    end
+  end,
+  {
+    nargs = 1,
+    complete = function() return {"start", "stop", "toggle"} end,
+    desc = "...",
+  })
+vim.api.nvim_create_user_command("ToggleDiagnostic", function() vim.cmd("Diagnostic toggle") end, {})

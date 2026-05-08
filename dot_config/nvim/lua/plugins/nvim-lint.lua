@@ -48,7 +48,7 @@ return {
     })
 
     -- Toggle command
-    vim.api.nvim_create_user_command("LintToggle", function()
+    vim.api.nvim_create_user_command("ToggleLint", function()
       lint_enabled = not lint_enabled
       if lint_enabled then
         vim.notify("Linting enabled", vim.log.levels.INFO)

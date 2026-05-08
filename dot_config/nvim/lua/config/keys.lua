@@ -141,7 +141,7 @@ function M.lsp_keymaps()
 		{ 'ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', desc = "Show code actions" },
 		{ 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', desc = "Show LSP definitions" },
 		{ "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Go to declaration", },
-    { 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', desc = "Show LSP implementations"}, 
+    { 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', desc = "Show LSP implementations"},
 		{ 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', desc = "Show LSP type definitions"},
 		{ 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', desc = "References", nowait = true },
     { "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Signature Help", },
@@ -240,5 +240,7 @@ end
 -- 		},
 -- 	}
 -- end
+
+
 
 return M
