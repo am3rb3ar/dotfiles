@@ -5,5 +5,4 @@ return {
   dependencies = {
     "mfussenegger/nvim-dap",
   },
-  keys = 
 }
