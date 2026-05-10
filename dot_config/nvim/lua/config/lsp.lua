@@ -43,12 +43,12 @@ local virtual_lines = function(opts)
     ['start'] = function()
       virtuallines_enabled = true
       config({ virtual_lines = { current_line = true } })
-      -- vim.notify("Virtual lines enabled", vim.log.levels.INFO)
+      vim.notify("Virtual lines enabled", vim.log.levels.INFO)
     end,
     ['stop'] = function()
       virtuallines_enabled = false
       config({ virtual_lines = false })
-      -- vim.notify("Virtual lines disabled", vim.log.levels.INFO)
+      vim.notify("Virtual lines disabled", vim.log.levels.INFO)
     end,
     ['toggle'] = function()
       if virtuallines_enabled then
@@ -56,11 +56,11 @@ local virtual_lines = function(opts)
           and config().virtual_lines
           and config().virtual_lines.current_line then
           config({ virtual_lines = false })
-          -- vim.notify("Virtual lines disabled", vim.log.levels.INFO)
         else
           config({ virtual_lines = { current_line = true } })
-          -- vim.notify("Virtual lines enabled", vim.log.levels.INFO)
         end
+
+        vim.notify("Virtual lines toggled", vim.log.levels.INFO)
       end
     end
   }
@@ -80,7 +80,7 @@ vim.api.nvim_create_user_command(
     desc = "..."
   }
 )
-vim.api.nvim_create_user_command("ToggleVirtualLines", function() virtual_lines("toggle") end, {})
+vim.api.nvim_create_user_command("ToggleVirtualLines", function() virtual_lines({args = "toggle"}) end, {})
 
 local diagflow_enabled = true
 local diagflow = function(opts)
@@ -90,15 +90,18 @@ local diagflow = function(opts)
     ['start'] = function()
       diagflow_enabled = true
       diagflow.enable()
+      vim.notify("Diagflow enabled", vim.log.levels.INFO)
     end,
     ['stop'] = function()
       diagflow_enabled = false
       diagflow.disable()
+      vim.notify("Diagflow disabled", vim.log.levels.INFO)
     end,
     ['toggle'] = function()
       if diagflow_enabled then
         require("diagflow").toggle()
         vim.cmd('doautocmd CursorMoved')
+      vim.notify("Diagflow toggled", vim.log.levels.INFO)
       end
     end
   }
@@ -118,7 +121,7 @@ vim.api.nvim_create_user_command(
     desc = "..."
   }
 )
-vim.api.nvim_create_user_command("ToggleDiagflow", function() diagflow("toggle") end, {})
+vim.api.nvim_create_user_command("ToggleDiagflow", function() diagflow({args = "toggle"}) end, {})
 
 vim.api.nvim_create_user_command(
   "Diagnostic",
@@ -138,8 +141,12 @@ vim.api.nvim_create_user_command(
         if not (diagflow_enabled or virtuallines_enabled) then
           vim.notify("Both Diagflow and ViruatlLines are disabled", vim.log.levels.WARN)
         else
-          diagflow({args = "toggle"})
-          virtual_lines({args = "toggle"})
+          if diagflow_enabled then
+            diagflow({args = "toggle"})
+          end
+          if virtuallines_enabled then
+            virtual_lines({args = "toggle"})
+          end
         end
       end,
     }
