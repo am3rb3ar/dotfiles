@@ -5,16 +5,16 @@ set -g fish_greeting ""
 fish_add_path "$HOME/.local/bin"
 
 if status is-interactive
-  # command -q zellij && zellij setup --generate-auto-start fish | string collect | source
+  command -q zellij && zellij setup --generate-auto-start fish | string collect | source
 
   fish_vi_key_bindings
   command -q fastfetch && fastfetch
 
   # --no-rehash skips the expensive rehash subprocess on every shell start;
   # run `pyenv rehash` / `goenv rehash` / `rbenv rehash` manually after installing a new version
-  command -q pyenv && pyenv init - --no-rehash fish | source
-  command -q goenv && goenv init - --no-rehash fish | source
-  command -q rbenv && rbenv init - --no-rehash fish | source
+  # command -q pyenv && pyenv init - --no-rehash fish | source
+  # command -q goenv && goenv init - --no-rehash fish | source
+  # command -q rbenv && rbenv init - --no-rehash fish | source
 
 
   # better cd: https://github.com/ajeetdsouza/zoxide
@@ -32,10 +32,6 @@ if status is-interactive
     set -l kubectl_version (kubectl version --client --short 2>/dev/null; or kubectl version --client 2>/dev/null | head -1)
     _cache_tool_init kubectl $kubectl_version kubectl completion fish
   end
-
-  # fzf.fish key bindings
-  # functions -q fzf_configure_bindings && fzf_configure_bindings --variables=ctrl-alt-v --history=ctrl-alt-r
-  # fzf_configure_bindings --variables=ctrl-alt-v --history=ctrl-alt-r
 
   # status line: https://starship.rs/
   command -q starship && starship init fish | source

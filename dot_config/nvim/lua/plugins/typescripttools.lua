@@ -1,7 +1,26 @@
 return {
-  "pmizio/typescript-tools.nvim",
-  dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
-  opts = {},
+  -- "pmizio/typescript-tools.nvim",
+  -- dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+  -- opts = {
+    -- tsserver_path = '/Users/daniel.blum/.local/share/volta/bin/tsserver',
+    -- tsserver_file_preferences = {
+    --   importModuleSpecifierPreference = "non-relative"
+    -- },
+    -- settings = {
+    --   -- Disable Deno integration to avoid conflicts
+    --   deno = false,
+    --   typescript = {
+    --     tsserver_plugins = {},
+    --   }
+    -- },
+    -- -- Ensure initialization happens with explicit command
+    -- init_options = {
+    --   preferences = {
+    --     quotePreference = "single",
+    --     importModuleSpecifierPreference = "non-relative",
+    --   }
+    -- }
+  -- },
 
   -- "pmizio/typescript-tools.nvim",
   -- dependencies = {

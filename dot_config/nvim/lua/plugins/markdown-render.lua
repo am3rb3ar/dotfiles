@@ -14,5 +14,12 @@ return {
       border_virtual = true,
     },
     render_modes = true;
+    html = {
+      comment = {
+        conceal = false,
+        text = nil,
+        highlight = 'RenderMarkdownHtmlComment',
+      },
+    },
   },
 }
