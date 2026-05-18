@@ -2,14 +2,14 @@
 ################################################################################
 # NETSKOPE CERTIFICATE CONFIGURATION
 
-set --local path "/Users/Shared/Netskope/nscacert_combined.pem"
+set -x NETSKOPE_PATH "/Users/Shared/Netskope/nscacert_combined.pem"
 
-set -x AWS_CA_BUNDLE $path 
-set -x REQUESTS_CA_BUNDLE $path
-set -x SSL_CERT_FILE $path
-set -x NODE_EXTRA_CA_CERTS $path
-set -x GIT_SSL_CAINFO $path
-set -x DENO_CERT $path
+set -x AWS_CA_BUNDLE $NETSKOPE_PATH 
+set -x REQUESTS_CA_BUNDLE $NETSKOPE_PATH
+set -x SSL_CERT_FILE $NETSKOPE_PATH
+set -x NODE_EXTRA_CA_CERTS $NETSKOPE_PATH
+set -x GIT_SSL_CAINFO $NETSKOPE_PATH
+set -x DENO_CERT $NETSKOPE_PATH
 
 # END NETSKOPE CERTIFICATE CONFIGURATION
 ################################################################################
