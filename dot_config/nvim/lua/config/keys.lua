@@ -149,7 +149,7 @@ function M.lsp_keymaps()
 		{
       "gh",
       function()
-        vim.cmd('Diagnostic toggle')
+        vim.cmd('ToggleDiagnostic')
       end,
       desc = "Toggle Diagnostic Hints",
       silent = true,
