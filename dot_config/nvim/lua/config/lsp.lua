@@ -1,5 +1,5 @@
 -- Turning off ALL logging cause of the stupid terraformls writing everything to stderr....
--- vim.lsp.log.set_level("OFF")
+
 
 vim.diagnostic.config({
   update_in_insert = false,  -- Only update diagnostics when returning to normal mode
