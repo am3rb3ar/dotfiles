@@ -42,6 +42,7 @@ function M.snacks_keymaps()
 		{ "<leader>fn", function() require("snacks").picker.notifications() end, desc = "Notifications" },
 		{ "<leader>fr", function() require("snacks").picker.recent() end, desc = "Recent Files" },
 		{ "<leader>fw", function() require("snacks").picker.grep_word() end, desc = "Grep Word Under Cursor" },
+		{ "<leader>fd", function() require("snacks").picker.todo_comments() end, desc = "List TODOs" },
   }
 end
 

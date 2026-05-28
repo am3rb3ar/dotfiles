@@ -14,6 +14,7 @@ return {
 			local languages = {
 				"bash",
 				"c",
+        "comments",
 				"css",
 				"diff",
 				"dockerfile",
