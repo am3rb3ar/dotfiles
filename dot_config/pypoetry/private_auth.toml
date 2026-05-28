@@ -1,0 +1,5 @@
+[http-basic.garage-pypi]
+username = "daniel-blum"
+
+[http-basic.adi-ingress]
+username = "daniel-blum"
