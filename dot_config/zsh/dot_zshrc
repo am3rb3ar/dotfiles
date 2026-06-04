@@ -166,6 +166,9 @@ source <(kubectl completion zsh)
 
 eval "$(rbenv init - zsh)"
 
+# cargo/rustup
+source "${XDG_DATA_HOME}/cargo/env"
+
 ## Personal Scripts
 # export PATH="/Users/daniel.blum/code/bin:$PATH"
 

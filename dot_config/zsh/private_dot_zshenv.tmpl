@@ -45,6 +45,10 @@ export CPPFLAGS="$openssl_cpp_flag $libpq_cpp_flag $zlib_cpp_flag"
 
 export CONFIGURE_OPTS="--with-openssl=$(brew --prefix openssl)"
 
+# cargo/rustup
+export CARGO_HOME="$XDG_DATA_HOME/cargo"
+export RUSTUP_HOME="$XDG_DATA_HOME/rustup"
+
 # Go
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
@@ -88,4 +92,5 @@ export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 # CloudSmith
 export CLOUDSMITH_USERNAME="daniel-blum"
 
+# add XDG_DATA_HOME/bin to path
 export PATH="$PATH:$HOME/.local/bin"
