@@ -22,7 +22,7 @@ keymap('v', '<C-j>', ":m '>+1<CR>gv=gv", merge_tables(opts, { desc = 'Move selec
 -- turn off search highlight
 keymap('n', '<leader>/', ':nohlsearch<cr>', merge_tables(opts, { desc = 'Turn off search highlighting' }))
 -- turn off virtual text
-keymap('n', 'gm', ':InlayHints<cr>', merge_tables(opts, { desc = 'Toggle Inlay Hints' }))
+keymap('n', 'gm', ':ToggleInlayHints<cr>', merge_tables(opts, { desc = 'Toggle Inlay Hints' }))
 
 
 -------------------------------------------------------------------------------
