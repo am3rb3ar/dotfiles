@@ -1,0 +1,10 @@
+[registry]
+global-credential-providers = ["cargo:token", "cargo:libsecret", "cargo:macos-keychain", "cargo:wincred"]
+
+[registries]
+garage-crates = { index = "sparse+https://cargo.cloudsmith.io/adi/ag-garage/" }
+adi-ingress = { index = "sparse+https://cargo.cloudsmith.io/adi/ingress/" }
+
+# you don't need this for cloudsmith but it's been very nice to have for many cargo operations
+[net]
+git-fetch-with-cli = true

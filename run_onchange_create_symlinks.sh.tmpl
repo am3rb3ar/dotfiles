@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Path: ~/.local/share/chezmoi/run_onchange_create-symlinks.sh.tmpl
+
+set -euo pipefail
+
+CARGO_CONFIG_FILE="${HOME}/.config/cargo/config.toml"
+CARGO_CONFIG_LINK="${HOME}/.local/share/cargo/config.toml"
+
+# app-config.json hash: {{ include "dot_config/cargo/config.toml" | sha256sum }}
+[ -f "${CARGO_CONFIG_LINK}" ] && rm -f "${CARGO_CONFIG_LINK}"
+ln -s "${CARGO_CONFIG_FILE}" "${CARGO_CONFIG_LINK}"
+
