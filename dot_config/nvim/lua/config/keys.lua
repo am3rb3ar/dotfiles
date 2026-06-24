@@ -201,6 +201,12 @@ function M.claudecode_keymaps()
   }
 end
 
+function M.zen_mode_keymaps()
+  return {
+    { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" },
+  }
+end
+
 
 -- function M.dap_keymaps()
 --   return {
