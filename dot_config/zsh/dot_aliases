@@ -61,6 +61,7 @@ alias cd='z'
 
 # zellij
 alias zj='zellij'
+alias zja='zellij attach $(zellij ls | fzf --ansi | awk '\''{print $1}'\'')'
 
 # nvim
 alias nv='nvim'

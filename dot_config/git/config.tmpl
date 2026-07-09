@@ -84,8 +84,9 @@
 	path = ~/.config/git/config-personal
 
 [alias]
+	aliases = config --get-regexp '^alias\\.'
 	l = "log --pretty=oneline -n 10"
   diff-ss = -c delta.features=side-by-side diff
-	aliases = config --get-regexp '^alias\\.'
+  pom = "pull origin main"
 [remote "origin"]
 	tagOpt = --no-tags

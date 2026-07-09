@@ -1,4 +1,15 @@
 #compdef zellij
+#
+    _zellij_session_autocomplete() {
+        local cur prev opts
+        cur="${COMP_WORDS[COMP_CWORD]}"  # The word being completed
+        prev="${COMP_WORDS[COMP_CWORD-1]}"  # The previous word
+
+        if [[ "$prev" == "d" || "$prev" == "a" || "$prev" == "k" ]]; then
+            opts=$(zellij ls -ns 2>/dev/null)  # Get available sessions
+            COMPREPLY=( $(compgen -W "${opts}" -- "${cur}") )  # Generate suggestions
+        fi
+    }
 
 autoload -U is-at-least
 
@@ -901,7 +912,7 @@ _arguments "${_arguments_options[@]}" \
 '--help[Print help information]' \
 && ret=0
 ;;
-(attach)
+(attach|a)
 _arguments "${_arguments_options[@]}" \
 '*--index=[Number of the session index in the active sessions ordered creation date]:INDEX: ' \
 '*-t+[Authentication token for remote sessions]:TOKEN: ' \

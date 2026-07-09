@@ -63,7 +63,7 @@ return {
   },
   {
     'dgagn/diagflow.nvim',
-    event = { 'LspAttach', 'BufReadPost' },
+    lazy = true,
     opts = {
       scope = 'line',
       max_width = 80,

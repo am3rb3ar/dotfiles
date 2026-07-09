@@ -81,24 +81,23 @@ vim.api.nvim_create_user_command(
 )
 vim.api.nvim_create_user_command("ToggleVirtualLines", function() vim.cmd("ViruatlLines toggle") end, {})
 
-DIAGFLOW_ENABLED = true
+DIAGFLOW_ENABLED = false
 local diagflow = function(opts)
   local args = opts.args
-  local diagflow_mod = require('diagflow')
   local switch = {
     ['start'] = function()
       DIAGFLOW_ENABLED = true
-      diagflow_mod.enable()
+      require('diagflow').enable()
       vim.notify("Diagflow enabled", vim.log.levels.INFO)
     end,
     ['stop'] = function()
       DIAGFLOW_ENABLED = false
-      diagflow_mod.disable()
+      require('diagflow').disable()
       vim.notify("Diagflow disabled", vim.log.levels.INFO)
     end,
     ['toggle'] = function()
       if DIAGFLOW_ENABLED then
-        require("diagflow").toggle()
+        require('diagflow').toggle()
         vim.cmd('doautocmd CursorMoved')
         vim.notify("Diagflow toggled", vim.log.levels.INFO)
       end

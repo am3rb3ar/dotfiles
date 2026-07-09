@@ -147,8 +147,8 @@ keybinds clear-defaults=true {
     }
     normal {
         bind "Ctrl Alt Shift f" { ToggleFloatingPanes; }
-        bind "Ctrl Alt Shift [" { PreviousSwapLayout; }
-        bind "Ctrl Alt Shift ]" { NextSwapLayout; }
+        // bind "Ctrl Alt Shift [" { PreviousSwapLayout; }
+        // bind "Ctrl Alt Shift ]" { NextSwapLayout; }
     }
     shared_among "normal" "locked" {
         // bind "Ctrl Shift f" { ToggleFloatingPanes; }
@@ -207,8 +207,8 @@ keybinds clear-defaults=true {
         bind "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
         bind "Alt =" { Resize "Increase"; }
-        bind "Alt [" { PreviousSwapLayout; }
-        bind "Alt ]" { NextSwapLayout; }
+        // bind "Alt [" { PreviousSwapLayout; }
+        // bind "Alt ]" { NextSwapLayout; }
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt h" { MoveFocusOrTab "left"; }
         bind "Alt i" { MoveTab "left"; }
