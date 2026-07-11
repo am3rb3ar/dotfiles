@@ -3,6 +3,9 @@ README.md
 .config/fish/conf.d/netskope.fish
 .config/zsh/netskope.zsh
 {{- end }}
+{{ if not (default true .work) -}}
+.config/hypr/**
+{{- end }}
 {{ if not (default false .configure_zsh) -}}
 .config/zsh/**
 {{- end }}

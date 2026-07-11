@@ -1,0 +1,136 @@
+###################
+### KEYBINDINGS ###
+###################
+
+# See https://wiki.hypr.land/Configuring/Keywords/
+$mod = SUPER  # Sets "Windows" key as main modifier
+
+# Example binds, see https://wiki.hypr.land/Configuring/Binds/ for more
+bind = $mod, T, exec, $terminal 
+bind = $mod, C, killactive,
+# bind = $mod, M, exit,
+# bind = $mod, E, exec, $fileManager
+# bind = $mod, V, togglefloating,
+bind = $mod, space, exec, $menu
+# bind = $mod, P, pseudo, # dwindldowne
+bind = $mod SHIFT, q, exec, hyprlock
+#! @description: "Toggle between dwindle and master layout"; @windows;
+# bind = $mod SHIFT, apostrophe, exec, hyprctl keyword general:layout "$(hyprctl getoption general:layout | grep -q 'dwindle' && echo 'master' || echo 'dwindle')"
+
+bind = $mod, tab, hy3:togglefocuslayer
+bind = $mod SHIFT, tab, togglefloating,
+
+unbind = CONTROL, return
+
+bind = $mod, d, hy3:makegroup, h
+bind = $mod, s, hy3:makegroup, v
+bind = $mod, z, hy3:makegroup, tab
+bind = $mod, a, hy3:changefocus, raise
+bind = $mod+SHIFT, a, hy3:changefocus, lower
+bind = $mod, x, hy3:locktab
+bind = $mod, f, hy3:expand, expand
+bind = $mod+SHIFT, f, hy3:expand, base
+bind = $mod, r, hy3:changegroup, opposite
+bind = $mod+SHIFT, r, hy3:changegroup, untab 
+
+bindm = $mod, mouse:272, movewindow
+bindm = $mod, mouse:273, resizewindow
+bindn = , mouse_down, hy3:focustab, l, require_hovered
+bindn = , mouse_up, hy3:focustab, r, require_hovered
+bind = $mod, q, hy3:warpcursor
+
+bind = $mod, i, exec, hyprctl keyword plugin:hy3:tabs:height 20
+bind = $mod, i, exec, hyprctl keyword plugin:hy3:tabs:render_text true
+bind = $mod, o, exec, hyprctl keyword plugin:hy3:tabs:height 20
+bind = $mod, o, exec, hyprctl keyword plugin:hy3:tabs:render_text true
+
+bindr = $mod, o, exec, hyprctl keyword plugin:hy3:tabs:height 2
+bindr = $mod, o, exec, hyprctl keyword plugin:hy3:tabs:render_text false
+
+bind = $mod, h, hy3:movefocus, l
+bind = $mod, j, hy3:movefocus, d
+bind = $mod, k, hy3:movefocus, u
+bind = $mod, l, hy3:movefocus, r
+bind = $mod, left, hy3:movefocus, l
+bind = $mod, down, hy3:movefocus, d
+bind = $mod, up, hy3:movefocus, u
+bind = $mod, right, hy3:movefocus, r
+
+bind = $mod+SHIFT, h, hy3:movewindow, l, once
+bind = $mod+SHIFT, j, hy3:movewindow, d, once
+bind = $mod+SHIFT, k, hy3:movewindow, u, once
+bind = $mod+SHIFT, l, hy3:movewindow, r, once
+bind = $mod+SHIFT, left, hy3:movewindow, l, once
+bind = $mod+SHIFT, down, hy3:movewindow, d, once
+bind = $mod+SHIFT, up, hy3:movewindow, u, once
+bind = $mod+SHIFT, right, hy3:movewindow, r, once
+
+$resize_amount = 5%
+binde = $mod+CTRL, l, resizeactive, $resize_amount 0
+binde = $mod+CTRL, h, resizeactive, -$resize_amount 0
+binde = $mod+CTRL, k, resizeactive, 0 -$resize_amount
+binde = $mod+CTRL, j, resizeactive, 0 $resize_amount
+bind = $mod+CTRL, r, hy3:equalize, workspace
+
+# Switch workspaces with mod + [0-9]
+bind = $mod, 1, workspace, 1
+bind = $mod, 2, workspace, 2
+bind = $mod, 3, workspace, 3
+bind = $mod, 4, workspace, 4
+bind = $mod, 5, workspace, 5
+bind = $mod, 6, workspace, 6
+bind = $mod, 7, workspace, 7
+bind = $mod, 8, workspace, 8
+bind = $mod, 9, workspace, 9
+bind = $mod, 0, workspace, 10
+
+# Move focus to workspaces with mod + shift + [0-9]
+bind = $mod+SHIFT, 1, hy3:movetoworkspace, 01
+bind = $mod+SHIFT, 2, hy3:movetoworkspace, 02
+bind = $mod+SHIFT, 3, hy3:movetoworkspace, 03
+bind = $mod+SHIFT, 4, hy3:movetoworkspace, 04
+bind = $mod+SHIFT, 5, hy3:movetoworkspace, 05
+bind = $mod+SHIFT, 6, hy3:movetoworkspace, 06
+bind = $mod+SHIFT, 7, hy3:movetoworkspace, 07
+bind = $mod+SHIFT, 8, hy3:movetoworkspace, 08
+bind = $mod+SHIFT, 9, hy3:movetoworkspace, 09
+bind = $mod+SHIFT, 0, hy3:movetoworkspace, 10
+
+# Switch workspace to next monitor
+bind = $mod+SHIFT, bracketleft, movecurrentworkspacetomonitor, +1
+bind = $mod+SHIFT, bracketright, movecurrentworkspacetomonitor, -1
+
+# floating terminal
+windowrule = float on, size (monitor_w*0.7) (monitor_h*0.55), center on, match:class special-term
+workspace = special:terminal, on-created-empty:kitty --class special-term --config ~/.config/kitty/special-term.conf \
+  attach-toggle-terminal # symbolic link to ./scripts/attach-toggle-terminal.sh
+bind = CONTROL, grave, exec, toggle-terminal # sybolic link to ./scripts/toggle-terminal.sh
+
+# Move/resize windows with mod + LMB/RMB and dragging
+bindm = $mod, mouse:272, movewindow
+bindm = $mod, mouse:273, resizewindow
+
+# Laptop multimedia keys for volume and LCD brightness
+bindel = ,XF86AudioRaiseVolume, exec, wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
+bindel = ,XF86AudioLowerVolume, exec, wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+bindel = ,XF86AudioMute, exec, wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+bindel = ,XF86AudioMicMute, exec, wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+bindel = ,XF86MonBrightnessUp, exec, brightnessctl -e4 -n2 set 5%+
+bindel = ,XF86MonBrightnessDown, exec, brightnessctl -e4 -n2 set 5%-
+
+# Requires playerctl
+bindl = , XF86AudioNext, exec, playerctl next
+bindl = , XF86AudioPause, exec, playerctl play-pause
+bindl = , XF86AudioPlay, exec, playerctl play-pause
+bindl = , XF86AudioPrev, exec, playerctl previous
+
+# Screenlock
+
+# bindl=,switch:on:Lid Switch,exec,hyprlock --immediate
+bindl=,switch:on:Lid Switch,exec, \
+  [ $( \
+    upower -i /org/freedesktop/UPower/devices/battery_BAT0 \
+    | grep state \
+    | awk '{print $2}' \
+    ) == 'discharging' ] \
+  && hyprlock --immediate
