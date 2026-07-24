@@ -6,9 +6,9 @@ vim.diagnostic.config({
   severity_sort = true,
 
   -- Disabled: diagflow handles these
-  virtual_text = {
-    current_line = true
-  },
+  -- virtual_text = {
+  --   current_line = true
+  -- },
   underline = true,
   virtual_lines = {
     current_line = true,
