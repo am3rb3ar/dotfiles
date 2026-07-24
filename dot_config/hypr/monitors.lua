@@ -12,7 +12,7 @@ hl.monitor({
 
 hl.monitor({
   output = "desc:Dell Inc. DELL G3223Q G76R3H3",
-  mode = "3840x2160@119.88",
+  mode = "3840x2160@60.00",
   position = "-192x-1530",
   scale = 1,
   sdr_min_luminance = 0.2,
