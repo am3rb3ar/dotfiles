@@ -423,7 +423,11 @@ default_shell "fish"
 // copy_command "wl-copy"                    // wayland
 // copy_command "pbcopy"                     // osx
 // 
+{{ if eq .chezmoi.os "darwin" }}
 copy_command "pbcopy"
+{{ else if eq .chezmoi.os "linux" }}
+copy_command "wl-copy"
+{{ end }}
  
 // Choose the destination for copied text
 // Allows using the primary selection buffer (on x11/wayland) instead of the system clipboard.
@@ -437,7 +441,7 @@ copy_command "pbcopy"
 // Enable automatic copying (and clearing) of selection when releasing mouse
 // Default: true
 // 
-// copy_on_select true
+copy_on_select true
  
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
