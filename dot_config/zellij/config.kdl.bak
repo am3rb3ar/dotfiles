@@ -1,3 +1,0 @@
-keybinds {
-  locked "Ctrl space" { SwitchMode "normal"; }
-}
