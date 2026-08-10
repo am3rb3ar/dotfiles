@@ -12,8 +12,6 @@ local opts = { noremap = true, silent = true }
 -- keymap("n", "<C-left>", ":vertical resize +2<cr>", opts)
 
 -- navigate buffers
-keymap('n', '<tab>', ':bnext<cr>', merge_tables(opts, { desc = 'Next tab' }))
-keymap('n', '<s-tab>', ':bprevious<cr>', merge_tables(opts, { desc = 'Previous tab' }))
 
 -- move text up and down
 keymap('v', '<C-k>', ":m '<-2<CR>gv=gv", merge_tables(opts, { desc = 'Move selection up' }))
@@ -49,6 +47,9 @@ end
 -- stylua: ignore
 function M.barbar_keymaps()
 	return {
+
+    { "<tab>", "<cmd>BufferNext<cr>", desc = 'Next tab', mode = 'n' },
+    { "<s-tab>", "<cmd>BufferPrevious<cr>", desc = 'Previous tab', mode = 'n' },
 		{ "<leader>bb", "<cmd>BufferPick<CR>", desc = "Pick Buffer", mode = "n" },
 		{ "<leader>bc", "<cmd>BufferClose<CR>", desc = "Close Buffer", mode = "n" },
 		{ "<leader>bd", "<cmd>BufferCloseAllButVisible<CR>", desc = "Close All but Visible Buffers", mode = "n", },
