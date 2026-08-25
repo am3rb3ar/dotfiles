@@ -15,33 +15,6 @@
   },
   "provider": {
     {{ if (default false .work) -}}
-    "portkey": {
-      "npm": "@ai-sdk/openai-compatible",
-      "name": "Portkey",
-      "options": {
-        "baseURL": "https://api.portkey.ai/v1",
-        "headers": {
-          "x-portkey-api-key": "{{ onepasswordRead "op://Employee/Portkey/credential" }}"
-        }
-      },
-      "models": {
-        "@azure-openai-eus2-global/gpt-5.5-dzs": {
-          "name": "gpt-5.5"
-        },
-        "@gcp-vertexai-us-global-integration/gemini-3.5-flash": {
-          "name": "gemini-3.5-flash"
-        },
-        "@bedrock-global/us.anthropic.claude-opus-5": {
-          "name": "claude-opus-5"
-        },
-        "@bedrock-global/us.anthropic.claude-sonnet-5": {
-          "name": "claude-sonnet-5"
-        },
-        "@bedrock-global/us.anthropic.claude-haiku-4-5-20251001-v1:0": {
-          "name": "claude-haiku-4.5"
-        },
-      }
-    }
-  {{- end }}
+    {{- end }}
   }
 }
