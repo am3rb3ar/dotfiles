@@ -1,4 +1,5 @@
 README.md
+.config/yazi/plugins/**
 {{ if not (default false .work) -}}
 .config/fish/conf.d/netskope.fish
 .config/zsh/netskope.zsh
@@ -9,3 +10,4 @@ README.md
 {{ if not (default false .configure_zsh) -}}
 .config/zsh/**
 {{- end }}
+
