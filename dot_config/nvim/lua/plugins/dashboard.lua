@@ -112,6 +112,7 @@ return {
         dashboard.button("g", " " .. " Find text",             ":lua require('snacks').picker.grep()<CR>"),
         -- dashboard.button("s", " " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
         dashboard.button("z", "󰒲 " .. " Lazy",                  "<cmd> Lazy <cr>"),
+        dashboard.button("m", " " .. " Mason",                 "<cmd> Mason <cr>"),
         dashboard.button("q", " " .. " Quit",                  "<cmd> qa <cr>"),
       }
       for _, button in ipairs(dashboard.section.buttons.val) do
