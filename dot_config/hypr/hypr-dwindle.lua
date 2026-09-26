@@ -22,6 +22,7 @@ hl.config({
 local mod = "SUPER"
 local add_shift = "+SHIFT+"
 
+
 hl.bind(mod .. "+T", hl.dsp.exec_cmd(TERMINAL))
 hl.bind(mod .. "+C", hl.dsp.window.close())
 hl.bind(mod .. "+space", hl.dsp.exec_cmd(MENU))
