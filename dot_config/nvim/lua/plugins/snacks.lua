@@ -11,8 +11,8 @@ local picker_config = {
   win = {
     input = {
       keys = {
-        ["<C-h>"] = { "cycle_win", mode = "i" },
-        ["<C-l>"] = { "cycle_win", mode = "i" },
+        ["<C-h>"] = { "cycle_win", mode = {"i", "n"} },
+        ["<C-l>"] = { "cycle_win", mode = {"i", "n"} },
       },
     },
     list = {

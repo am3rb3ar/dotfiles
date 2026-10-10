@@ -20,7 +20,8 @@ keymap('v', '<C-j>', ":m '>+1<CR>gv=gv", merge_tables(opts, { desc = 'Move selec
 -- turn off search highlight
 keymap('n', '<leader>/', ':nohlsearch<cr>', merge_tables(opts, { desc = 'Turn off search highlighting' }))
 -- turn off virtual text
-keymap('n', 'gm', ':ToggleInlayHints<cr>', merge_tables(opts, { desc = 'Toggle Inlay Hints' }))
+keymap('n', 'gm', ':ToggleInlayHints<cr>', merge_tables(opts, { desc = 'Toggle inlay hints' }))
+keymap('n', 'yd', ':YankVirtualText<cr>', merge_tables(opts, { desc = 'Yank diagnostic virtual text' }))
 
 
 -------------------------------------------------------------------------------
@@ -206,6 +207,13 @@ function M.zen_mode_keymaps()
   return {
     { "<leader>z", "<cmd>ZenMode<cr>", desc = "Zen Mode" },
   }
+end
+
+function M.gx_keymaps()
+  return {
+    { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } }
+  }
+  
 end
 
 
