@@ -9,4 +9,4 @@ vim.api.nvim_create_user_command('YankVirtualText', function()
 	vim.fn.setreg('+', text) -- system clipboard
 	vim.fn.setreg('"', text) -- unnamed register, so `p` works too
 	vim.notify('Yanked ' .. #msgs .. ' diagnostic(s)')
-end, { desc = 'Yank Virtual Text' })
+end, { desc = 'Yank diagnostic virtual text' })

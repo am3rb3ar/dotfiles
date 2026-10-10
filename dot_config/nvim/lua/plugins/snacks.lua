@@ -11,6 +11,7 @@ local picker_config = {
   win = {
     input = {
       keys = {
+        ["<Esc>"] = { "close", mode = { "n", "i" } },
         ["<C-h>"] = { "cycle_win", mode = {"i", "n"} },
         ["<C-l>"] = { "cycle_win", mode = {"i", "n"} },
       },
@@ -19,6 +20,7 @@ local picker_config = {
       keys = {
         ["<C-h>"] = "cycle_win",
         ["<C-l>"] = "cycle_win",
+
       },
     },
     preview = {

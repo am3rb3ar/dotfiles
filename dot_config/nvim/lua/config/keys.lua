@@ -19,8 +19,6 @@ keymap('v', '<C-j>', ":m '>+1<CR>gv=gv", merge_tables(opts, { desc = 'Move selec
 
 -- turn off search highlight
 keymap('n', '<leader>/', ':nohlsearch<cr>', merge_tables(opts, { desc = 'Turn off search highlighting' }))
--- turn off virtual text
-keymap('n', 'gm', ':ToggleInlayHints<cr>', merge_tables(opts, { desc = 'Toggle inlay hints' }))
 keymap('n', 'yd', ':YankVirtualText<cr>', merge_tables(opts, { desc = 'Yank diagnostic virtual text' }))
 
 
@@ -35,7 +33,8 @@ function M.snacks_keymaps()
     { "<leader>ff", function() require("snacks").picker.files() end, desc = "Find Files" },
 		{ "<leader>fg", function() require("snacks").picker.grep() end, desc = "Live Grep" },
 		{ "<leader>fb", function() require("snacks").picker.buffers() end, desc = "Buffers" },
-		{ "<leader>fd", function() require("snacks").picker.diagnostics() end, desc = "Diagnostics" },
+		{ "<leader>fd", function() require("snacks").picker.diagnostics_buffer() end, desc = "Diagnostics Buffer" },
+		{ "<leader>fa", function() require("snacks").picker.diagnostics() end, desc = "Diagnostics All" },
 		{ "<leader>fh", function() require("snacks").picker.help() end, desc = "Help Tags" },
 		{ "<leader>fc", function() require("snacks").picker.colorschemes() end, desc = "Colorschemes" },
 		{ "<leader>fn", function() require("snacks").picker.notifications() end, desc = "Notifications" },
@@ -149,15 +148,8 @@ function M.lsp_keymaps()
 		{ 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', desc = "References", nowait = true },
     { "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Signature Help", },
     { "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename var under cursor", },
-		{
-      "gh",
-      function()
-        vim.cmd('ToggleDiagnostic')
-      end,
-      desc = "Toggle Diagnostic Hints",
-      silent = true,
-      noremap = true,
-    },
+		{ "gh", function() vim.cmd 'ToggleVirtualLines' end, desc = "Toggle virtual lines", noremap = true, },
+    { "gm", ':ToggleInlayHints<cr>', desc = 'Toggle inlay hints' },
 	}
 end
 

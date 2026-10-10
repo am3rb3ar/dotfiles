@@ -1,162 +1,96 @@
 -- Turning off ALL logging cause of the stupid terraformls writing everything to stderr....
 
+vim.diagnostic.config {
+	update_in_insert = false, -- Only update diagnostics when returning to normal mode
+	severity_sort = true,
+	underline = true,
+	virtual_lines = {
+		current_line = true,
+	},
 
-vim.diagnostic.config({
-  update_in_insert = false,  -- Only update diagnostics when returning to normal mode
-  severity_sort = true,
+	signs = {
+		text = {
+			[vim.diagnostic.severity.HINT] = '',
+			[vim.diagnostic.severity.ERROR] = '✘',
+			[vim.diagnostic.severity.INFO] = '◉',
+			[vim.diagnostic.severity.WARN] = '',
+		},
+	},
+}
 
-  -- Disabled: diagflow handles these
-  -- virtual_text = {
-  --   current_line = true
-  -- },
-  underline = true,
-  virtual_lines = {
-    current_line = true,
-  },
+-------------------------------------------------------------------------------
+-- Helper Commands ------------------------------------------------------------
+-------------------------------------------------------------------------------
 
-  signs = {
-    text = {
-      [vim.diagnostic.severity.HINT] = "",
-      [vim.diagnostic.severity.ERROR] = "✘",
-      [vim.diagnostic.severity.INFO]  = "◉",
-      [vim.diagnostic.severity.WARN]  = ""
-    }
-  }
+-- toggle virtual lines -------------------------------------------------------
+
+local function virtual_lines_enabled()
+	return vim.diagnostic.config().virtual_lines ~= false
+end
+
+local virtual_lines = function(opts)
+	local start = function()
+		vim.diagnostic.config { virtual_lines = { current_line = true } }
+		vim.notify('Virtual lines enabled', vim.log.levels.INFO)
+	end
+
+	local stop = function()
+		vim.diagnostic.config { virtual_lines = false }
+		vim.notify('Virtual lines disabled', vim.log.levels.INFO)
+	end
+
+	local switch = {
+		start = start,
+		stop = stop,
+		toggle = function()
+			if virtual_lines_enabled() then
+				stop()
+			else
+				start()
+			end
+		end,
+	}
+	if switch[opts.args] then
+		switch[opts.args]()
+	else
+		vim.notify('VirtualLines: Not a valid option', vim.log.levels.WARN)
+	end
+end
+
+vim.api.nvim_create_user_command('VirtualLines', virtual_lines, {
+	nargs = 1,
+	complete = function() return { 'start', 'stop', 'toggle' } end,
+	desc = 'Choose to Display virtual lines',
 })
 
--- 'dgagn/diagflow.nvim' uses an older API so this allows it to have the same symbols
-vim.fn.sign_define("DiagnosticSignHint", { text = "", texthl = "DiagnosticSignHint" })
-vim.fn.sign_define("DiagnosticSignError", { text = "✘", texthl = "DiagnosticSignError" })
-vim.fn.sign_define("DiagnosticSignInfo", { text = "◉", texthl = "DiagnosticSignInfo" })
-vim.fn.sign_define("DiagnosticSignWarn", { text = "", texthl = "DiagnosticSignWarn" })
-
-
--------------------------------------------------------------------------------
--- commands to help with diagflow and virtual_text displays
--------------------------------------------------------------------------------
----
-VIRTUALLINE_ENABLED = true
-local virtual_lines = function(opts)
-  local args = opts.args
-  local config = vim.diagnostic.config
-  local switch = {
-    ['start'] = function()
-      VIRTUALLINE_ENABLED = true
-      config({ virtual_lines = { current_line = true } })
-      vim.notify("Virtual lines enabled", vim.log.levels.INFO)
-    end,
-    ['stop'] = function()
-      VIRTUALLINE_ENABLED = false
-      config({ virtual_lines = false })
-      vim.notify("Virtual lines disabled", vim.log.levels.INFO)
-    end,
-    ['toggle'] = function()
-      if VIRTUALLINE_ENABLED then
-        if config ~= nil
-          and config().virtual_lines
-          and config().virtual_lines.current_line then
-          config({ virtual_lines = false })
-        else
-          config({ virtual_lines = { current_line = true } })
-        end
-        vim.notify("Virtual lines toggled", vim.log.levels.INFO)
-      end
-    end
-  }
-  if switch[args] then
-    switch[args]()
-  else
-    vim.notify("ViruatlLines: Not a valid option", vim.log.levels.WARN)
-  end
-end
-
 vim.api.nvim_create_user_command(
-  "VirtualLines",
-  virtual_lines,
-  {
-    nargs = 1,
-    complete = function() return {"start", "stop", "toggle"} end,
-    desc = "..."
-  }
+	'ToggleVirtualLines',
+	function() virtual_lines { args = 'toggle' } end,
+	{ desc = 'Toggle virtual lines' }
 )
-vim.api.nvim_create_user_command("ToggleVirtualLines", function() vim.cmd("ViruatlLines toggle") end, {})
 
-DIAGFLOW_ENABLED = false
-local diagflow = function(opts)
-  local args = opts.args
-  local switch = {
-    ['start'] = function()
-      DIAGFLOW_ENABLED = true
-      require('diagflow').enable()
-      vim.notify("Diagflow enabled", vim.log.levels.INFO)
-    end,
-    ['stop'] = function()
-      DIAGFLOW_ENABLED = false
-      require('diagflow').disable()
-      vim.notify("Diagflow disabled", vim.log.levels.INFO)
-    end,
-    ['toggle'] = function()
-      if DIAGFLOW_ENABLED then
-        require('diagflow').toggle()
-        vim.cmd('doautocmd CursorMoved')
-        vim.notify("Diagflow toggled", vim.log.levels.INFO)
-      end
-    end
-  }
-  if switch[args] then
-    switch[args]()
+-- toggle inlay hints ---------------------------------------------------------
+
+vim.api.nvim_create_user_command('ToggleInlayHints', function()
+  local enabled = not vim.lsp.inlay_hint.is_enabled({})
+  vim.lsp.inlay_hint.enable(enabled)
+  vim.notify("Inlay hints: " .. (enabled and " on" or "off"))
+end, { desc = 'Toggle inlay hints' })
+
+-- flip between Terraform and OpenTofu ----------------------------------------
+
+vim.g.terraform_ls_enabled = true
+vim.api.nvim_create_user_command('ToggleTFLsp', function()
+  if vim.g.terraform_ls_enabled == true then
+    vim.cmd("lsp disable terraformls")
+    vim.cmd("lsp disable terraformls") -- for some reason had to do this twice.....
+    vim.cmd("lsp enable tofu_ls")
+    vim.g.terraform_ls_enabled = false
+    vim.diagnostic.reset()
   else
-    vim.notify("Diagflow: Not a valid option", vim.log.levels.WARN)
+    vim.cmd("lsp disable tofu_ls")
+    vim.cmd("lsp enable terraformls")
+    vim.g.terraform_ls_enabled = true
+    vim.diagnostic.reset()
   end
-end
-vim.api.nvim_create_user_command(
-  "Diagflow",
-  diagflow,
-  {
-    nargs = 1,
-    complete = function() return {"start", "stop", "toggle"} end,
-    desc = "..."
-  }
-)
-vim.api.nvim_create_user_command("ToggleDiagflow", function() vim.cmd("Diagflow toggle") end, {})
-
-vim.api.nvim_create_user_command(
-  "Diagnostic",
-  function(opts)
-    local args = opts.args
-
-    local switch = {
-      ['start'] = function()
-        diagflow({args = "start"})
-        virtual_lines({args = "start"})
-      end,
-      ['stop'] = function()
-        diagflow({args = "stop"})
-        virtual_lines({args = "stop"})
-      end,
-      ['toggle'] = function()
-        if not DIAGFLOW_ENABLED and not VIRTUALLINE_ENABLED then
-          vim.notify("Both Diagflow and ViruatlLines are disabled", vim.log.levels.WARN)
-        else
-          if DIAGFLOW_ENABLED then
-            diagflow({args = "toggle"})
-          end
-          if VIRTUALLINE_ENABLED then
-            virtual_lines({args = "toggle"})
-          end
-        end
-      end,
-    }
-
-    if switch[args] then
-      switch[args]()
-    else
-      vim.notify("Diagnostic: Not a valid option", vim.log.levels.WARN)
-    end
-  end,
-  {
-    nargs = 1,
-    complete = function() return {"start", "stop", "toggle"} end,
-    desc = "...",
-  })
-vim.api.nvim_create_user_command("ToggleDiagnostic", function() vim.cmd("Diagnostic toggle") end, {})
+end, { desc = 'Toggle between terraformls or tofu_ls' })

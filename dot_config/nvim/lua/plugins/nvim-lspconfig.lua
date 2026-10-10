@@ -61,16 +61,16 @@ return {
   {
     "j-hui/fidget.nvim",
   },
-  {
-    'dgagn/diagflow.nvim',
-    lazy = true,
-    opts = {
-      scope = 'line',
-      max_width = 80,
-      max_height = 30,
-      show_borders = true,
-      show_sign = true,
-      toggle_event = { 'InsertEnter', 'InsertLeave' },  -- Disable in insert mode, re-enable on leaving
-    }
-  },
+  -- {
+  --   'dgagn/diagflow.nvim',
+  --   lazy = true,
+  --   opts = {
+  --     scope = 'line',
+  --     max_width = 80,
+  --     max_height = 30,
+  --     show_borders = true,
+  --     show_sign = true,
+  --     toggle_event = { 'InsertEnter', 'InsertLeave' },  -- Disable in insert mode, re-enable on leaving
+  --   }
+  -- },
 }
