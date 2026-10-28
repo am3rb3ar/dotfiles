@@ -11,8 +11,9 @@ after-login-command = []
 after-startup-command = [
     # JankyBorders has a built-in detection of already running process,
     # so it won't be run twice on AeroSpace restart
-    'exec-and-forget borders active_color=0xff92DCE5 inactive_color=0xff494d64 width=5.0 hidpi=on',
-    'exec-and-forget sketchybar'
+    # 'exec-and-forget borders active_color=0xff92DCE5 inactive_color=0xff494d64 width=5.0 hidpi=on',
+    'exec-and-forget borders',
+    # 'exec-and-forget sketchybar'
 ]
 
 exec-on-workspace-change = ['/bin/bash', '-c',
@@ -110,10 +111,10 @@ alt-quote = 'layout tiles horizontal vertical'
 alt-comma = 'layout accordion horizontal vertical'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#focus
-alt-h = 'focus left'
-alt-j = 'focus down'
-alt-k = 'focus up'
-alt-l = 'focus right'
+alt-h = 'focus left --wrap-around'
+alt-j = 'focus down --wrap-around'
+alt-k = 'focus up --wrap-around'
+alt-l = 'focus right --wrap-around'
 
 # See: https://nikitabobko.github.io/AeroSpace/commands#move
 alt-shift-h = 'move left'
@@ -231,14 +232,34 @@ check-further-callbacks = true
 run = 'layout floating'
 
 [[on-window-detected]]
+if.app-id = 'com.apple.finder'
+check-further-callbacks = true
+run = 'layout floating'
+
+[[on-window-detected]]
 if.window-title-regex-substring = "1Password"
 check-further-callbacks = true
 run = 'layout floating'
 
 [[on-window-detected]]
-if.window-title-regex-substring = 'Slack'
+if.window-title-regex-substring = 'Activity Monitor'
 check-further-callbacks = true
-run = ['move-node-to-workspace slack_obsidian']
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'Audio'
+check-further-callbacks = true
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'CleanMyMac'
+check-further-callbacks = true
+run = 'layout floating'
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'Dictionary'
+check-further-callbacks = true
+run = 'layout floating'
 
 [[on-window-detected]]
 if.window-title-regex-substring = 'Outlook'
@@ -252,6 +273,11 @@ run = ['move-node-to-workspace teams_outlook']
 
 [[on-window-detected]]
 if.window-title-regex-substring = 'Obsidian'
+check-further-callbacks = true
+run = ['move-node-to-workspace slack_obsidian']
+
+[[on-window-detected]]
+if.window-title-regex-substring = 'Slack'
 check-further-callbacks = true
 run = ['move-node-to-workspace slack_obsidian']
 
@@ -271,22 +297,8 @@ check-further-callbacks = true
 run = ['layout floating', 'move-node-to-workspace calls']
 
 [[on-window-detected]]
-if.app-id = 'com.apple.finder'
+if.window-title-regex-substring = 'OBS Studio'
 check-further-callbacks = true
-run = 'layout floating'
+run = ['layout floating', 'move-node-to-workspace calls']
 
-[[on-window-detected]]
-if.window-title-regex-substring = 'Activity Monitor'
-check-further-callbacks = true
-run = 'layout floating'
-
-[[on-window-detected]]
-if.window-title-regex-substring = 'Audio'
-check-further-callbacks = true
-run = 'layout floating'
-
-[[on-window-detected]]
-if.window-title-regex-substring = 'CleanMyMac'
-check-further-callbacks = true
-run = 'layout floating'
 
