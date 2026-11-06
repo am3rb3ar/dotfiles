@@ -33,14 +33,17 @@ function M.snacks_keymaps()
     { "<leader>ff", function() require("snacks").picker.files() end, desc = "Find Files" },
 		{ "<leader>fg", function() require("snacks").picker.grep() end, desc = "Live Grep" },
 		{ "<leader>fb", function() require("snacks").picker.buffers() end, desc = "Buffers" },
-		{ "<leader>fd", function() require("snacks").picker.diagnostics_buffer() end, desc = "Diagnostics Buffer" },
-		{ "<leader>fa", function() require("snacks").picker.diagnostics() end, desc = "Diagnostics All" },
 		{ "<leader>fh", function() require("snacks").picker.help() end, desc = "Help Tags" },
 		{ "<leader>fc", function() require("snacks").picker.colorschemes() end, desc = "Colorschemes" },
 		{ "<leader>fn", function() require("snacks").picker.notifications() end, desc = "Notifications" },
 		{ "<leader>fr", function() require("snacks").picker.recent() end, desc = "Recent Files" },
 		{ "<leader>fw", function() require("snacks").picker.grep_word() end, desc = "Grep Word Under Cursor" },
 		{ "<leader>ft", function() require("snacks").picker.todo_comments() end, desc = "List TODOs" },
+
+    -- look ath the lsp keycommands below for these
+		-- { "<leader>fd", function() require("snacks").picker.diagnostics_buffer() end, desc = "Diagnostics Buffer" },
+		-- { "<leader>fa", function() require("snacks").picker.diagnostics() end, desc = "Diagnostics All" },
+		-- { "<leader>fo", function() require("snacks").picker.lsp_references() end, desc = "Lsp References" },
   }
 end
 
@@ -141,15 +144,22 @@ function M.lsp_keymaps()
 		},
 		{ 'gl', '<cmd>lua vim.lsp.buf.codelens()<cr>', desc = "Show codelens" },
 		{ 'ga', '<cmd>lua vim.lsp.buf.code_action()<cr>', desc = "Show code actions" },
-		{ 'gd', '<cmd>lua vim.lsp.buf.definition()<cr>', desc = "Show LSP definitions" },
-		{ "gD", "<cmd>lua vim.lsp.buf.declaration()<cr>", desc = "Go to declaration", },
-    { 'gi', '<cmd>lua vim.lsp.buf.implementation()<cr>', desc = "Show LSP implementations"},
-		{ 'go', '<cmd>lua vim.lsp.buf.type_definition()<cr>', desc = "Show LSP type definitions"},
-		{ 'gr', '<cmd>lua vim.lsp.buf.references()<cr>', desc = "References", nowait = true },
-    { "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Signature Help", },
-    { "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename var under cursor", },
-		{ "gh", function() vim.cmd 'ToggleVirtualLines' end, desc = "Toggle virtual lines", noremap = true, },
-    { "gm", ':ToggleInlayHints<cr>', desc = 'Toggle inlay hints' },
+		{ "gs", "<cmd>lua vim.lsp.buf.signature_help()<cr>", desc = "Signature Help" },
+		{ "<F2>", "<cmd>lua vim.lsp.buf.rename()<cr>", desc = "Rename var under cursor" },
+		{ "gh", ':ToggleVirtualLines<cr>', desc = "Toggle virtual lines", noremap = true },
+		{ "gm", ':ToggleInlayHints<cr>', desc = 'Toggle inlay hints' },
+
+		-- Snacks pickers
+		{ 'gd', function() Snacks.picker.lsp_definitions() end, desc = "LSP definitions" },
+		{ 'gD', function() Snacks.picker.lsp_declarations() end, desc = "LSP declarations" },
+		{ 'gi', function() Snacks.picker.lsp_implementations() end, desc = "LSP implementations" },
+		{ 'go', function() Snacks.picker.lsp_type_definitions() end, desc = "LSP type definitions" },
+		{ 'gr', function() Snacks.picker.lsp_references() end, desc = "LSP references", nowait = true },
+    { 'gO', function() Snacks.picker.lsp_symbols() end, desc = "Document symbols" },
+    { 'gS', function() Snacks.picker.lsp_workspace_symbols() end, desc = "Workspace symbols" },
+    { 'gx', function() Snacks.picker.diagnostics_buffer() end, desc = "Buffer diagnostics" },
+    { 'gX', function() Snacks.picker.diagnostics() end, desc = "Workspace diagnostics" },
+
 	}
 end
 
