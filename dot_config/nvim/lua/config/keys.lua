@@ -17,6 +17,10 @@ local opts = { noremap = true, silent = true }
 keymap('v', '<C-k>', ":m '<-2<CR>gv=gv", merge_tables(opts, { desc = 'Move selection up' }))
 keymap('v', '<C-j>', ":m '>+1<CR>gv=gv", merge_tables(opts, { desc = 'Move selection down' }))
 
+-- indent and reselect
+vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
+vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
+
 -- turn off search highlight
 keymap('n', '<leader>/', ':nohlsearch<cr>', merge_tables(opts, { desc = 'Turn off search highlighting' }))
 keymap('n', 'yd', ':YankVirtualText<cr>', merge_tables(opts, { desc = 'Yank diagnostic virtual text' }))
