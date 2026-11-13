@@ -1,6 +1,7 @@
 M = {}
 
 local keymap = vim.api.nvim_set_keymap
+local km = vim.keymap.set
 local merge_tables = require('utils').merge_tables
 
 local opts = { noremap = true, silent = true }
@@ -11,20 +12,17 @@ local opts = { noremap = true, silent = true }
 -- keymap("n", "<C-right>", ":vertical resize -2<cr>", opts)
 -- keymap("n", "<C-left>", ":vertical resize +2<cr>", opts)
 
--- navigate buffers
-
 -- move text up and down
-keymap('v', '<C-k>', ":m '<-2<CR>gv=gv", merge_tables(opts, { desc = 'Move selection up' }))
-keymap('v', '<C-j>', ":m '>+1<CR>gv=gv", merge_tables(opts, { desc = 'Move selection down' }))
+km('v', '<C-k>', ":m '<-2<CR>gv=gv", { silent = true, desc = 'Move selection up' })
+km('v', '<C-j>', ":m '>+1<CR>gv=gv", { silent = true, desc = 'Move selection down' })
 
 -- indent and reselect
-vim.keymap.set('v', '<', '<gv', { desc = 'Indent left and reselect' })
-vim.keymap.set('v', '>', '>gv', { desc = 'Indent right and reselect' })
+km('v', '<', '<gv', { silent = true, desc = 'Indent left and reselect' })
+km('v', '>', '>gv', { silent = true, desc = 'Indent right and reselect' })
 
 -- turn off search highlight
-keymap('n', '<leader>/', ':nohlsearch<cr>', merge_tables(opts, { desc = 'Turn off search highlighting' }))
-keymap('n', 'yd', ':YankVirtualText<cr>', merge_tables(opts, { desc = 'Yank diagnostic virtual text' }))
-
+km('n', '<leader>/', ':nohlsearch<cr>', { silent = true, desc = 'Turn off search highlighting' })
+km('n', 'yd', ':YankVirtualText<cr>', { silent = true, desc = 'Yank diagnostic virtual text' })
 
 -------------------------------------------------------------------------------
 -- Plugins --------------------------------------------------------------------
