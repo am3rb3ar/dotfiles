@@ -4,7 +4,7 @@
 
 keybinds clear-defaults=true {
     locked {
-        bind "Ctrl z" { SwitchToMode "normal"; }
+        bind "Ctrl =" { SwitchToMode "normal"; }
     }
     pane {
         bind "left" { MoveFocus "left"; }
@@ -182,7 +182,7 @@ keybinds clear-defaults=true {
         bind "Ctrl \\" { SwitchToMode "session"; }
     }
     shared_except "locked" "entersearch" "renametab" "renamepane" "prompt" "tmux" {
-        bind "Ctrl z" { SwitchToMode "locked"; }
+        bind "Ctrl =" { SwitchToMode "locked"; }
     }
     shared_except "locked" "scroll" {
         bind "Ctrl s" { SwitchToMode "scroll"; }
@@ -254,7 +254,7 @@ keybinds clear-defaults=true {
         bind "enter" { SwitchToMode "search"; }
     }
     shared_among "entersearch" "renametab" "renamepane" "prompt" "tmux" {
-        bind "Ctrl z" { SwitchToMode "locked"; }
+        bind "Ctrl =" { SwitchToMode "locked"; }
     }
     renametab {
         bind "esc" { UndoRenameTab; SwitchToMode "tab"; }
