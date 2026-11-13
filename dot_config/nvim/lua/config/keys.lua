@@ -43,6 +43,7 @@ function M.snacks_keymaps()
 		{ "<leader>fr", function() require("snacks").picker.recent() end, desc = "Recent Files" },
 		{ "<leader>fw", function() require("snacks").picker.grep_word() end, desc = "Grep Word Under Cursor" },
 		{ "<leader>ft", function() require("snacks").picker.todo_comments() end, desc = "List TODOs" },
+		{ "<leader>f'", function() require("snacks").picker.registers() end, desc = "List Registers" },
 
     -- look ath the lsp keycommands below for these
 		-- { "<leader>fd", function() require("snacks").picker.diagnostics_buffer() end, desc = "Diagnostics Buffer" },
